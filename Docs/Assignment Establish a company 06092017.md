@@ -1,0 +1,10 @@
+Our service is about creating a platform that allow people, who go to a grocery to bring groceries to people in their neighborhood. This service allows elderly people to stay at home as long as possible. We did ask several elderly people if they would like to use such a service, in form of a mobile app, that provides them such a functionality. The result was pretty clear. When this app can help them to life longer at home, then they would really like to use it. As the target group for delivering customers we are focusing on students. Because many students go to the grocery regularly and most probably would like to earn some additional money.
+
+The mobile app should be easy to use. Think about an elder women who needs some milk, but has problems to get to the grocery store. Neither can she walk that good anymore nor can she use the bus. So she opens the app, or calls our hotline and orders the milk she wants and tell us the store she prefers. Our service will then calculate a fair delivery price, based on the weight and size of the products. Shortly after a student walks into that particular store and receives a gps based push notification, with the offer to buy some additional milk and deliver it. Our service has some information about the delivery customers, so it is possible to target only the customers, who are probably live nearby the ordering persons.
+
+This app will help to establish a delivery service on rural areas. Areas where it may not be sufficient for players, like Amazon Fresh to setup a cost intensive delivery network.
+
+To realize the idea there are some issues that need to be solved. How do we provide always the correct information about the available products and their price? Does the ordering customer pays in advance through the platform? What happens, when the delivering customer destroys or steals the groceries?
+
+
+Team members: Maria Syed, Benedikt Benz, Patrick Puritscher and Thanh Do
