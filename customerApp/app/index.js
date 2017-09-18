@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import { Text } from 'react-native';
 import OnBoardingScene from './scenes/OnBoarding';
 
+const steps = [<OnBoardingScene />];
+
 export default class extends Component {
-  static steps = [<OnBoardingScene />];
   state = {
     currentStep: 0,
   };
 
   render() {
-    console.log(this.steps);
-    return <OnBoardingScene />;
+    return steps[0];
   }
 }
