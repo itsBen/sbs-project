@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
-import OnBoardingScene from './scenes/OnBoarding';
 
-const steps = [<OnBoardingScene />];
+import { TabNavigator } from 'react-navigation';
 
-export default class extends Component {
-  state = {
-    currentStep: 0,
-  };
+import BrowseScene from './scenes/BrowseScene';
+import CartScene from './scenes/CartScene';
+import OnBoardingScene from './scenes/OnBoardingScene';
 
-  render() {
-    return steps[0];
+export default TabNavigator(
+  {
+    Browse: {
+      screen: BrowseScene,
+    },
+    Cart: {
+      screen: CartScene,
+    },
+  },
+  {
+    tabBarPosition: 'bottom',
+    animationEnabled: false,
+    tabBarOptions: {
+      activeTintColor: '#e91e63',
+      labelStyle: {
+        fontSize: 12,
+      },
+    },
   }
-}
+);
