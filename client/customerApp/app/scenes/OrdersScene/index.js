@@ -16,7 +16,7 @@ export default class extends Component {
     tabBarLabel: 'Orders',
     // Note: By default the icon is only shown on iOS. Search the showIcon option below.
     tabBarIcon: ({ tintColor }) => (
-      <Icon name="shopping-cart" size={27} color={tintColor} />
+      <Icon name="list" size={27} color={tintColor} />
     ),
   };
   render() {

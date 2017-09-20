@@ -13,8 +13,8 @@ const ModalStack = StackNavigator({
   BrowseCategory: {
     screen: BrowseCategoryScreen,
     navigationOptions: ({ navigation }) => ({
-      title: `${navigation.state.param
-        ? navigation.state.param.title
+      title: `${navigation.state.params
+        ? navigation.state.params.title
         : 'Product'}`,
     }),
   },
