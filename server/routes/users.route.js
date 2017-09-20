@@ -17,18 +17,3 @@ const schema = new mongoose.Schema({
 })
 
 const Product = mongoose.model('Product', schema);
-
-router.get('/:category',(req,res)=>{
-  const query = {
-    category: req.params.category
-  };
-  Product.find(query, (err,data)=>{
-    if(err)
-      throw err;
-    else {
-      res.json(data);
-    }
-  });
-});
-
-module.exports = router;
