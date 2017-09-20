@@ -3,11 +3,11 @@ import { Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import CartOverviewScreen from '../../screens/CartOverviewScreen';
+import OrdersOverviewScreen from '../../screens/OrdersOverviewScreen';
 
 const ModalStack = StackNavigator({
   Orders: {
-    screen: () => <Text>Orders</Text>,
+    screen: () => <OrdersOverviewScreen />,
   },
 });
 
@@ -16,7 +16,7 @@ export default class extends Component {
     tabBarLabel: 'Orders',
     // Note: By default the icon is only shown on iOS. Search the showIcon option below.
     tabBarIcon: ({ tintColor }) => (
-      <Icon name="list" size={27} color={tintColor} />
+      <Icon name="shopping-cart" size={27} color={tintColor} />
     ),
   };
   render() {
