@@ -15,7 +15,7 @@ const ModalStack = StackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: `${navigation.state.param
         ? navigation.state.param.title
-        : 'Products'}`,
+        : 'Product'}`,
     }),
   },
 });

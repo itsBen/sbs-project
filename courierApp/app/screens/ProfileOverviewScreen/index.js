@@ -1,4 +1,4 @@
 import React from 'react';
 import { Text } from 'react-native';
 
-export default () => <Text>Cart overview</Text>;
+export default () => <Text>Profile overview</Text>;

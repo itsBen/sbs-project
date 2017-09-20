@@ -4,7 +4,8 @@ import { View, Text } from 'react-native'
 import { TabNavigator } from 'react-navigation';
 
 import BrowseScene from './scenes/BrowseScene';
-import CartScene from './scenes/CartScene';
+import OrdersScene from './scenes/OrdersScene';
+import ProfileScene from './scenes/ProfileScene';
 import OnBoardingScene from './scenes/OnBoardingScene';
 
 export default TabNavigator(
@@ -12,9 +13,12 @@ export default TabNavigator(
     Browse: {
       screen: BrowseScene,
     },
-    Cart: {
-      screen: CartScene,
+    Orders: {
+      screen: OrdersScene,
     },
+    Profile: {
+      screen: ProfileScene,
+    }
   },
   {
     tabBarPosition: 'bottom',
