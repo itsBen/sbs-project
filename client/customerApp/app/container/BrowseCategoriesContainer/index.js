@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Button, ScrollView, StyleSheet, Text } from 'react-native';
 
+import { defaultPaddings } from '../../config';
+
 import SearchField from '../../components/Searchfield';
 
 export default class extends PureComponent {
@@ -26,7 +28,7 @@ export default class extends PureComponent {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 10,
+    paddingHorizontal: defaultPaddings.paddingHorizontal,
   },
   heroText: {
     fontSize: 18,

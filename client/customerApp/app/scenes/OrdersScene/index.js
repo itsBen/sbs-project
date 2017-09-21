@@ -3,11 +3,11 @@ import { Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import OrdersOverviewScreen from '../../screens/OrdersOverviewScreen';
+import OrdersOverviewContainer from '../../container/OrdersOverviewContainer';
 
 const ModalStack = StackNavigator({
   Orders: {
-    screen: OrdersOverviewScreen,
+    screen: OrdersOverviewContainer,
   },
 });
 
