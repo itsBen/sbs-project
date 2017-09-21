@@ -39,12 +39,12 @@ const Screen = () => (
         >
           <Cell
             cellStyle="RightDetail"
-            title="Estimated cost of Groceries"
+            title="Estimated cost of groceries"
             detail="4.17 €"
           />
           <Cell
             cellStyle="RightDetail"
-            title="Estimated cost for Delivery"
+            title="Estimated cost for delivery"
             detail="2.85 €"
           />
         </Section>
@@ -62,7 +62,6 @@ Screen.navigationOptions = {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     paddingBottom: defaultPaddings.paddingHorizontal,
   },
   body: {
