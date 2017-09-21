@@ -1,5 +1,4 @@
 import React, { Pure } from 'react';
-import { Text } from 'react-native';
 
 import { TableView, Section, Cell } from 'react-native-tableview-simple';
 import IconCell from '../../components/IconCell';
