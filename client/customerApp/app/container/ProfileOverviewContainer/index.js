@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { TableView, Section, Cell } from 'react-native-tableview-simple';
+import { TableView, Section } from 'react-native-tableview-simple';
 
 import ProfileHeaderCell from '../../components/ProfileHeaderCell';
 import IconCell from '../../components/IconCell';
