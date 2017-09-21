@@ -4,9 +4,15 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default ({ iconName, ...props }) => (
   <Cell
+    accessory="DisclosureIndicator"
     contentContainerStyle={{ paddingVertical: 10 }}
-    cellAccessoryView={
-      <Icon name={iconName} size={22} color="rgb(153,153,153)" />
+    cellImageView={
+      <Icon
+        name={iconName}
+        size={22}
+        color="rgb(153,153,153)"
+        style={{ marginRight: 15 }}
+      />
     }
     {...props}
   />

@@ -6,8 +6,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import ProfileOverviewContainer from '../../container/ProfileOverviewContainer';
 
 const ModalStack = StackNavigator({
-  Cart: {
-    screen: () => <ProfileOverviewContainer />,
+  Profile: {
+    screen: ProfileOverviewContainer,
   },
 });
 
