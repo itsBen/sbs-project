@@ -15,6 +15,7 @@ const Screen = () => (
       <TableView>
         <Section header="LIDL" sectionTintColor="#E9E9EF">
           <Cell
+            accessory="DisclosureIndicator"
             cellStyle="RightDetail"
             title="2 x Lactose free milk"
             detail="0.89 € / Unit"
@@ -22,11 +23,13 @@ const Screen = () => (
         </Section>
         <Section header="PRISMA" sectionTintColor="#E9E9EF">
           <Cell
+            accessory="DisclosureIndicator"
             cellStyle="RightDetail"
             title="Ruisleipä 500g"
             detail="1.50 €"
           />
           <Cell
+            accessory="DisclosureIndicator"
             cellStyle="RightDetail"
             title="Lactose free milk"
             detail="0.89 €"
@@ -43,6 +46,7 @@ const Screen = () => (
             detail="4.17 €"
           />
           <Cell
+            accessory="Detail"
             cellStyle="RightDetail"
             title="Estimated cost for delivery"
             detail="2.85 €"
