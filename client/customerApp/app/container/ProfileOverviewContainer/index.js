@@ -1,5 +1,4 @@
 import React from 'react';
-import { View } from 'react-native';
 
 import { TableView, Section } from 'react-native-tableview-simple';
 

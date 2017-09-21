@@ -1,7 +1,6 @@
-import React, { Pure } from 'react';
+import React from 'react';
 
 import { TableView, Section, Cell } from 'react-native-tableview-simple';
-import IconCell from '../../components/IconCell';
 
 const Screen = () => (
   <TableView>
