@@ -16,13 +16,8 @@ const Screen = () => (
         <Section header="LIDL" sectionTintColor="#E9E9EF">
           <Cell
             cellStyle="RightDetail"
-            title="Lactose free milk"
-            detail="0.89 €"
-          />
-          <Cell
-            cellStyle="RightDetail"
-            title="Lactose free milk"
-            detail="0.89 €"
+            title="2 x Lactose free milk"
+            detail="0.89 € / Unit"
           />
         </Section>
         <Section header="PRISMA" sectionTintColor="#E9E9EF">
