@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
-import { Button, ScrollView, StyleSheet, Text } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 import { defaultPaddings } from '../../config';
 
-import SearchField from '../../components/Searchfield';
+import CategoryIcon from '../../components/CategoryIcon';
 
 export default class extends PureComponent {
   static navigationOptions = {
@@ -11,15 +11,49 @@ export default class extends PureComponent {
   };
   render() {
     return (
-      <ScrollView contentContainerStyle={styles.container}>
-        <SearchField placeholder="Search for products" />
-        <Text style={styles.heroText}>
-          OR{`\n`}select the type of grocery you want
-        </Text>
-        <Button
+      <ScrollView
+        contentContainerStyle={styles.container}
+        alwaysBounceVertical={false}
+      >
+        <CategoryIcon
           onPress={() =>
             this.props.navigation.navigate('BrowseCategory', { title: 'Milk' })}
-          title="Milk"
+          label="Milk"
+          imageSource={{
+            uri: 'https://facebook.github.io/react/img/logo_og.png',
+          }}
+        />
+        <CategoryIcon
+          onPress={() =>
+            this.props.navigation.navigate('BrowseCategory', { title: 'Milk' })}
+          label="Milk"
+          imageSource={{
+            uri: 'https://facebook.github.io/react/img/logo_og.png',
+          }}
+        />
+        <CategoryIcon
+          onPress={() =>
+            this.props.navigation.navigate('BrowseCategory', { title: 'Milk' })}
+          label="Milk"
+          imageSource={{
+            uri: 'https://facebook.github.io/react/img/logo_og.png',
+          }}
+        />
+        <CategoryIcon
+          onPress={() =>
+            this.props.navigation.navigate('BrowseCategory', { title: 'Milk' })}
+          label="Milk"
+          imageSource={{
+            uri: 'https://facebook.github.io/react/img/logo_og.png',
+          }}
+        />
+        <CategoryIcon
+          onPress={() =>
+            this.props.navigation.navigate('BrowseCategory', { title: 'Milk' })}
+          label="Milk"
+          imageSource={{
+            uri: 'https://facebook.github.io/react/img/logo_og.png',
+          }}
         />
       </ScrollView>
     );
@@ -28,11 +62,10 @@ export default class extends PureComponent {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: defaultPaddings.paddingHorizontal,
-  },
-  heroText: {
-    fontSize: 18,
-    textAlign: 'center',
-    marginVertical: 20,
+    paddingVertical: defaultPaddings.paddingHorizontal,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
+    justifyContent: 'space-around',
   },
 });
