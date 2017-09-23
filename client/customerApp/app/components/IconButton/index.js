@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export default ({ iconName, label }) => (
-  <TouchableOpacity>
+export default ({ iconName, label, onPress }) => (
+  <TouchableOpacity onPress={onPress}>
     <View style={styles.container}>
       <Icon name={iconName} size={20} color="#fff" />
       <Text style={styles.label}>{label}</Text>

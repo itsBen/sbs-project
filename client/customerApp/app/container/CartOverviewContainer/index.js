@@ -7,11 +7,11 @@ import { defaultPaddings } from '../../config';
 import Button from '../../components/Button';
 
 const Screen = () => (
-  <ScrollView
-    contentContainerStyle={styles.container}
-    alwaysBounceVertical={false}
-  >
-    <View style={styles.body}>
+  <View style={styles.container}>
+    <ScrollView
+      contentContainerStyle={styles.body}
+      alwaysBounceVertical={false}
+    >
       <TableView>
         <Section header="LIDL" sectionTintColor="#E9E9EF">
           <Cell
@@ -53,11 +53,11 @@ const Screen = () => (
           />
         </Section>
       </TableView>
-    </View>
+    </ScrollView>
     <View style={styles.footer}>
       <Button title="Place order for 7.02 €" />
     </View>
-  </ScrollView>
+  </View>
 );
 
 Screen.navigationOptions = {
@@ -66,12 +66,11 @@ Screen.navigationOptions = {
 
 const styles = StyleSheet.create({
   container: {
-    paddingBottom: defaultPaddings.paddingHorizontal,
-  },
-  body: {
     flex: 1,
   },
+  body: {},
   footer: {
+    paddingVertical: defaultPaddings.paddingHorizontal,
     paddingHorizontal: defaultPaddings.paddingHorizontal,
   },
 });

@@ -5,11 +5,13 @@ import { defaultPaddings } from '../../config';
 import IconButton from '../IconButton';
 
 export default ({
+  productId,
   title,
   subtitle,
   price,
   imageSource,
   stores = ['-'],
+  onAddToCart,
   ...props
 }) => (
   <View style={styles.container}>
@@ -21,10 +23,14 @@ export default ({
         <Text style={styles.descriptionTitle}>{title}</Text>
         <Text style={styles.descriptionSubtitle}>{subtitle}</Text>
       </View>
-      <Text style={styles.bodyFooterText}>Stores: {stores.join(', ')}</Text>
+      <Text style={styles.bodyFooterText}>Get Info</Text>
     </View>
     <View style={styles.actionsContainer}>
-      <IconButton iconName="add-shopping-cart" label={price} />
+      <IconButton
+        iconName="add-shopping-cart"
+        label={price}
+        onPress={() => onAddToCart(productId)}
+      />
     </View>
   </View>
 );

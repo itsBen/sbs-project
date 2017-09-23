@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export { default as SmallButton } from './SmallButton';
-
 export default ({ title, onPress, buttonStyle }) => (
   <TouchableOpacity onPress={onPress}>
     <View
@@ -31,17 +29,17 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(230,37,101)',
     borderColor: 'rgb(230,37,101)',
     borderWidth: 1,
-    paddingVertical: 15,
+    paddingVertical: 5,
     paddingHorizontal: 10,
     borderRadius: 5,
   },
   title: {
     color: '#FFF',
-    fontSize: 18,
+    fontSize: 17,
   },
   style_white__container: {
     backgroundColor: '#fff',
-    borderColor: '#808080',
+    borderColor: 'transparent',
   },
   style_white__title: {
     color: '#808080',
