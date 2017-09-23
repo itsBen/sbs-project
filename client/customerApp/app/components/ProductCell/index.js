@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: defaultPaddings.paddingHorizontal,
   },
   productImage: {
-    width: 100 - 2 * defaultPaddings.paddingHorizontal,
-    height: 80,
+    width: 90 - 2 * defaultPaddings.paddingHorizontal,
+    height: 70,
   },
   body: {
     flex: 1,
