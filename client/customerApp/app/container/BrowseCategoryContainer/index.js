@@ -8,38 +8,37 @@ import AddToCartDialog from '../../components/AddToCartDialog';
 
 export default class extends PureComponent {
   state = {
-    currentProductId: null,
+    currentDetailsProductId: null,
   };
 
   constructor(props) {
     super(props);
-    this.handleOpenAddToCartModal = this.handleOpenAddToCartModal.bind(this);
+    this.handleOpenDetails = this.handleOpenDetails.bind(this);
   }
 
   handleAddToCart() {
     console.log('bla!');
   }
 
-  handleOpenAddToCartModal(productId) {
+  handleOpenDetails(productId) {
     this.setState({
-      currentProductId: productId,
+      currentDetailsProductId: productId,
     });
   }
 
   render() {
-    console.log(this.state.currentProductId);
     // Render Modal every time to allow animations
     const renderAddToCartModal = () => (
       <Modal
-        isVisible={!!this.state.currentProductId}
+        isVisible={!!this.state.currentDetailsProductId}
         animationIn={'slideInRight'}
         animationOut={'slideOutRight'}
       >
         <AddToCartDialog
-          productId={this.state.currentProductId}
+          productId={this.state.currentDetailsProductId}
           size="bla"
           onAddToCart={this.handleAddToCart}
-          onClose={() => this.setState({ currentProductId: null })}
+          onClose={() => this.setState({ currentDetailsProductId: null })}
         />
       </Modal>
     );
@@ -53,7 +52,8 @@ export default class extends PureComponent {
             footer="I accept that the prices may vary. Also I accept, that there's no guarantee that the products are available at the written stores."
           >
             <ProductCell
-              onAddToCart={this.handleOpenAddToCartModal}
+              onAddToCart={this.handleAddToCart}
+              onOpenDetails={this.handleOpenDetails}
               productId="01AC"
               price="1.99 €"
               title="Low Fat Milk"

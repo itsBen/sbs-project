@@ -1,5 +1,11 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 
 import { defaultPaddings } from '../../config';
 import IconButton from '../IconButton';
@@ -12,19 +18,21 @@ export default ({
   imageSource,
   stores = ['-'],
   onAddToCart,
+  onOpenDetails,
   ...props
 }) => (
   <View style={styles.container}>
-    <View style={styles.imageContainer}>
-      <Image style={styles.productImage} source={imageSource} />
-    </View>
-    <View style={styles.bodyContainer}>
-      <View style={styles.bodyContent}>
+    <TouchableWithoutFeedback onPress={() => onOpenDetails(productId)}>
+      <View style={styles.imageContainer}>
+        <Image style={styles.productImage} source={imageSource} />
+      </View>
+    </TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={() => onOpenDetails(productId)}>
+      <View style={styles.body}>
         <Text style={styles.descriptionTitle}>{title}</Text>
         <Text style={styles.descriptionSubtitle}>{subtitle}</Text>
       </View>
-      <Text style={styles.bodyFooterText}>Get Info</Text>
-    </View>
+    </TouchableWithoutFeedback>
     <View style={styles.actionsContainer}>
       <IconButton
         iconName="add-shopping-cart"
@@ -50,13 +58,10 @@ const styles = StyleSheet.create({
     width: 100 - 2 * defaultPaddings.paddingHorizontal,
     height: 80,
   },
-  bodyContainer: {
+  body: {
     flex: 1,
     paddingTop: 10,
     paddingHorizontal: 5,
-  },
-  bodyContent: {
-    flex: 1,
   },
   descriptionTitle: {
     fontSize: 17,
@@ -64,10 +69,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   descriptionSubtitle: {
-    color: '#808080',
-    fontSize: 14,
-  },
-  bodyFooterText: {
     color: '#808080',
     fontSize: 14,
   },
