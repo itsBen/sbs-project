@@ -13,7 +13,6 @@ import IconButton from '../IconButton';
 export default ({
   productId,
   title,
-  subtitle,
   price,
   imageSource,
   stores = ['-'],
@@ -30,7 +29,7 @@ export default ({
     <TouchableWithoutFeedback onPress={() => onOpenDetails(productId)}>
       <View style={styles.body}>
         <Text style={styles.descriptionTitle}>{title}</Text>
-        <Text style={styles.descriptionSubtitle}>{subtitle}</Text>
+        <Text style={styles.descriptionSubtitle}>{stores.join(', ')}</Text>
       </View>
     </TouchableWithoutFeedback>
     <View style={styles.actionsContainer}>
@@ -60,8 +59,8 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
-    paddingTop: 10,
     paddingHorizontal: 5,
+    justifyContent: 'center',
   },
   descriptionTitle: {
     fontSize: 17,
