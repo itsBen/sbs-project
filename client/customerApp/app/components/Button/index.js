@@ -7,16 +7,14 @@ export default ({ title, onPress, buttonStyle }) => (
   <TouchableOpacity onPress={onPress}>
     <View
       style={
-        buttonStyle === 'white'
-          ? [styles.container, styles.style_white__container]
-          : styles.container
+        styles[buttonStyle]
+          ? styles[buttonStyle].container
+          : styles.default.container
       }
     >
       <Text
         style={
-          buttonStyle === 'white'
-            ? [styles.title, styles.style_white__title]
-            : styles.title
+          styles[buttonStyle] ? styles[buttonStyle].title : styles.default.title
         }
       >
         {title}
@@ -25,13 +23,13 @@ export default ({ title, onPress, buttonStyle }) => (
   </TouchableOpacity>
 );
 
-const styles = StyleSheet.create({
+const defaultStyles = {
   container: {
     alignItems: 'center',
     backgroundColor: 'rgb(230,37,101)',
     borderColor: 'rgb(230,37,101)',
     borderWidth: 1,
-    paddingVertical: 15,
+    paddingVertical: 10,
     paddingHorizontal: 10,
     borderRadius: 5,
   },
@@ -39,11 +37,19 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 18,
   },
-  style_white__container: {
-    backgroundColor: '#fff',
-    borderColor: '#808080',
-  },
-  style_white__title: {
-    color: '#808080',
-  },
-});
+};
+
+const styles = {
+  default: StyleSheet.create({ ...defaultStyles }),
+  white: StyleSheet.create({
+    container: {
+      ...defaultStyles.container,
+      backgroundColor: 'white',
+      borderColor: '#808080',
+    },
+    title: {
+      ...defaultStyles.title,
+      color: '#808080',
+    },
+  }),
+};

@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
 import Button, { SmallButton } from '../Button';
+import IconButton from '../IconButton';
 
 export default ({ onClose, onAddToCart }) => (
   <View style={styles.container}>
@@ -20,6 +21,11 @@ export default ({ onClose, onAddToCart }) => (
         </View>
 
         <Text style={styles.pricelabel}>1.75 €</Text>
+        <View style={styles.quantitySelector}>
+          <IconButton iconName="remove-circle-outline" colorScheme="white" />
+          <Text style={styles.quantitySelector_value}>1</Text>
+          <IconButton iconName="add-circle-outline" colorScheme="white" />
+        </View>
 
         <View style={styles.metatable}>
           <View style={styles.metatableElement}>
@@ -42,7 +48,7 @@ export default ({ onClose, onAddToCart }) => (
     </View>
     <View style={styles.footer}>
       <View style={styles.footerBody}>
-        <Button title="Add to Cart" onPress={() => onAddToCart()} />
+        <Button title="Update Order" onPress={() => onUpdateOrder()} />
         <View style={{ height: 10 }} />
         <SmallButton title="Cancel" buttonStyle="white" onPress={onClose} />
       </View>
@@ -106,6 +112,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 10,
     marginBottom: 20,
+  },
+  quantitySelector: {
+    marginBottom: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  quantitySelector_value: {
+    fontSize: 15,
+    alignSelf: 'center',
   },
   metatable: {
     borderWidth: 1,
