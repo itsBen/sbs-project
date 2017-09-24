@@ -3,21 +3,12 @@ import { Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import BrowseCategoriesScreen from '../../screens/BrowseCategoriesScreen';
-import BrowseCategoryScreen from '../../screens/BrowseCategoryScreen';
+import BrowseOrdersScreen from '../../container/BrowseOrdersContainer';
 
 const ModalStack = StackNavigator({
   Browse: {
-    screen: BrowseCategoriesScreen,
-  },
-  BrowseCategory: {
-    screen: BrowseCategoryScreen,
-    navigationOptions: ({ navigation }) => ({
-      title: `${navigation.state.param
-        ? navigation.state.param.title
-        : 'Product'}`,
-    }),
-  },
+    screen: BrowseOrdersScreen,
+  }
 });
 
 export default class extends Component {
