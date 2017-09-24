@@ -1,42 +1,88 @@
 const admin = require('../config/firebaseAdmin');
-//const auth = require('../config/test');
 const passport = require('../config/passport');
 
-module.exports = (app,db,passport) => {
+const Product = require('../models/ProductModel');
+const Store = require('../models/StoreModel');
+const Category = require('../models/CategoryModel');
 
-const schema = new db.Schema({
-  title: String,
-  avgPrice: Number,
-  stores: [{
-    name: String,
-    price: Number
-  }],
-  category: String
-})
+module.exports = (app, passport) => {
 
-const Product = db.model('Product', schema);
+  //get all products
+  app.get('/products', (req, res)=>{
+    Product.find({}, (err,data)=>{
+      if(err)
+        res.status(500);
+      else
+        res.json(data);
+    })
+  })
 
-app.get('/products/:category',(req,res)=>{
-  const query = {
-    category: req.params.category
-  };
-  Product.find(query, (err,data)=>{
-    if(err)
-      throw err;
-    else {
-      res.json(data);
-    }
-  });
-});
+  //get product by category id
+  app.get('/products/:categoryid', (req, res)=>{
+    Product.find({
+      category: req.params.categoryid
+    }, (err,data)=>{
+      if(err)
+        res.status(500);
+      else
+        res.json(data);
+    })
+  })
 
-app.get('/', (req,res)=>{
-  res.send('welcome page');
-});
+  //get product by name
+  app.get('/products/byname/:name', (req, res)=>{
+    Product.find({
+      name: req.params.name
+    }, (err,data)=>{
+      if(err)
+        res.status(500);
+      else
+        res.json(data);
+    })
+  })
 
-app.get('/users/:id', passport.authenticate('firebase'));
+  //get all stores
+  app.get('/stores', (req, res)=>{
+    Store.find({}, (err,data)=>{
+      if(err)
+        res.status(500);
+      else
+        res.json(data);
+    })
+  })
 
-app.get('/error', (req, res)=>{
-  res.send('error');
-});
+  //get store by name
+  app.get('/stores/:name', (req, res)=>{
+    Store.find({
+      name: req.params.name
+    }, (err,data)=>{
+      if(err)
+        res.status(500);
+      else
+        res.json(data);
+    })
+  })
+
+  //get all categories
+  app.get('/categories', (req, res)=>{
+    Category.find({}, (err,data)=>{
+      if(err)
+        res.status(500);
+      else
+        res.json(data);
+    })
+  })
+
+  //get category by name
+  app.get('/categories/:name', (req, res)=>{
+    Category.find({
+      name: req.params.name
+    }, (err,data)=>{
+      if(err)
+        res.status(500);
+      else
+        res.json(data);
+    })
+  })
 
 }
