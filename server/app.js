@@ -13,6 +13,9 @@ const passportConfig = require('./config/passport');
 
 passportConfig(passport);
 
+var index = require('./routes/index');
+const products = require('./routes/products.route');
+
 var app = express();
 
 // view engine setup
@@ -27,12 +30,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+<<<<<<< HEAD
 app.use(passport.initialize());
 app.use(passport.session());
 
 mongoose.connect(config.mongoDBUrl);
 
 routes(app, mongoose, passport);
+=======
+app.use('/', index);
+app.use('/products', products);
+>>>>>>> master
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
