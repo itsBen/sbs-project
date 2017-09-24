@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Cell, Section, TableView } from 'react-native-tableview-simple';
+import { ScrollView, StyleSheet, Text, View, Image } from 'react-native';
+import { Section, TableView } from 'react-native-tableview-simple';
+import OrderCell from '../../components/OrderCell'
 
 import { defaultPaddings } from '../../config';
 
@@ -11,25 +12,89 @@ export default class extends PureComponent {
   render() {
     return (
       <ScrollView
-        contentContainerStyle={styles.container}
         alwaysBounceVertical={false}
       >
         <TableView>
           <Section>
-            <Cell
-              cellContentView={
-                <View
-                  style={{ alignItems: 'center', flexDirection: 'row', flex: 1, paddingVertical: 10 }}
-                >
-                  <Text
-                    allowFontScaling
-                    numberOfLines={1}
-                    style={{ flex: 1, fontSize: 20 }}
-                  >
-                    Element 1
-                  </Text>
-                </View>
-              }
+            <OrderCell
+              orderDetails={{
+                store: 'Alepa',
+                location: 'Amiraalinkatu 3',
+                time: 10,
+                numberOfItems: 5,
+                totalPrice: 8.99,
+                deliveryFee: 5
+              }}
+            />
+            <OrderCell
+              orderDetails={{
+                store: 'K-Market',
+                location: 'Siltakuja 3',
+                time: 8,
+                numberOfItems: 12,
+                totalPrice: 34.89,
+                deliveryFee: 6
+              }}
+            />
+            <OrderCell
+              orderDetails={{
+                store: 'S-Market',
+                location: 'Vanha Viertotie 6',
+                time: 34,
+                numberOfItems: 9,
+                totalPrice: 15.60,
+                deliveryFee: 8
+              }}
+            />
+            <OrderCell
+              orderDetails={{
+                store: 'Lidl',
+                location: 'Vierakuja 3',
+                time: 29,
+                numberOfItems: 12,
+                totalPrice: 23.50,
+                deliveryFee: 11
+              }}
+            />
+            <OrderCell
+              orderDetails={{
+                store: 'Alepa',
+                location: 'Amiraalinkatu 3',
+                time: 10,
+                numberOfItems: 5,
+                totalPrice: 8.99,
+                deliveryFee: 5
+              }}
+            />
+            <OrderCell
+              orderDetails={{
+                store: 'K-Market',
+                location: 'Siltakuja 3',
+                time: 8,
+                numberOfItems: 12,
+                totalPrice: 34.89,
+                deliveryFee: 6
+              }}
+            />
+            <OrderCell
+              orderDetails={{
+                store: 'S-Market',
+                location: 'Vanha Viertotie 6',
+                time: 34,
+                numberOfItems: 9,
+                totalPrice: 15.60,
+                deliveryFee: 8
+              }}
+            />
+            <OrderCell
+              orderDetails={{
+                store: 'Lidl',
+                location: 'Vierakuja 3',
+                time: 29,
+                numberOfItems: 12,
+                totalPrice: 23.50,
+                deliveryFee: 11
+              }}
             />
           </Section>
         </TableView>
