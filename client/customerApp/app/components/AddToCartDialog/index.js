@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
   image: {
     width: 120,
     height: 120,
+    borderRadius: 5,
   },
   pricelabel: {
     fontSize: 19,
