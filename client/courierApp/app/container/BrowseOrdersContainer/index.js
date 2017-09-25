@@ -12,6 +12,7 @@ export default class extends PureComponent {
   render() {
     return (
       <ScrollView
+        style={styles.container}
         alwaysBounceVertical={false}
       >
         <TableView>
@@ -105,10 +106,6 @@ export default class extends PureComponent {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: defaultPaddings.paddingHorizontal,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'flex-start',
-    justifyContent: 'space-around',
+    flex: 1
   },
 });
