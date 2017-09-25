@@ -11,11 +11,14 @@
 ## Rest API URIs
 
 - /products
-- /products/:categoryid
-- /product/byname/:name
+- /products/category/:categoryid
+- /products/name/:name
+- /products/id/:productid
 
 - /stores
-- /stores/:name
+- /stores/name/:name
+- /stores/id/:storeid
 
 - /categories
-- /categories/:name
+- /categories/name/:name
+- /categories/id/:categoryid
