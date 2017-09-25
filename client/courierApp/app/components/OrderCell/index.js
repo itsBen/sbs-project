@@ -18,7 +18,7 @@ const rightButtons = [
 ]
 
 export default ({ orderDetails }) => {
-  const { store, location, time, numberOfItems, totalPrice, deliveryFee } = orderDetails
+  const { store, logo, location, time, numberOfItems, totalPrice, deliveryFee } = orderDetails
   return (
     <Cell
       cellContentView={
@@ -29,7 +29,7 @@ export default ({ orderDetails }) => {
           <View style={styles.container}>
             <View style={{ flex: 1 }}>
               <Image
-                source={{ uri: 'https://facebook.github.io/react/img/logo_og.png'}}
+                source={logo}
                 style={styles.image}
               />
             </View>
@@ -67,7 +67,8 @@ const styles = {
   image: {
     width: 50,
     height: 50,
-    borderRadius: 25
+    borderRadius: 25,
+    resizeMode: 'contain'
   },
   storeTitle: {
     fontWeight: '600',

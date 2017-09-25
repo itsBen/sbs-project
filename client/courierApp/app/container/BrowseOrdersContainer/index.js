@@ -22,6 +22,7 @@ export default class extends PureComponent {
             <OrderCell
               orderDetails={{
                 store: 'Alepa',
+                logo: require('../../assets/logo_alepa.png'),
                 location: 'Amiraalinkatu 3',
                 time: 10,
                 numberOfItems: 5,
@@ -32,6 +33,7 @@ export default class extends PureComponent {
             <OrderCell
               orderDetails={{
                 store: 'K-Market',
+                logo: require('../../assets/logo_kmarket.png'),
                 location: 'Siltakuja 3',
                 time: 8,
                 numberOfItems: 12,
@@ -42,6 +44,7 @@ export default class extends PureComponent {
             <OrderCell
               orderDetails={{
                 store: 'S-Market',
+                logo: require('../../assets/logo_kmarket.png'),
                 location: 'Vanha Viertotie 6',
                 time: 34,
                 numberOfItems: 9,
@@ -52,6 +55,7 @@ export default class extends PureComponent {
             <OrderCell
               orderDetails={{
                 store: 'Lidl',
+                logo: require('../../assets/logo_lidl.png'),
                 location: 'Vierakuja 3',
                 time: 29,
                 numberOfItems: 12,
@@ -62,6 +66,7 @@ export default class extends PureComponent {
             <OrderCell
               orderDetails={{
                 store: 'Alepa',
+                logo: require('../../assets/logo_alepa.png'),
                 location: 'Amiraalinkatu 3',
                 time: 10,
                 numberOfItems: 5,
@@ -72,6 +77,7 @@ export default class extends PureComponent {
             <OrderCell
               orderDetails={{
                 store: 'K-Market',
+                logo: require('../../assets/logo_kmarket.png'),
                 location: 'Siltakuja 3',
                 time: 8,
                 numberOfItems: 12,
@@ -82,6 +88,7 @@ export default class extends PureComponent {
             <OrderCell
               orderDetails={{
                 store: 'S-Market',
+                logo: require('../../assets/logo_kmarket.png'),
                 location: 'Vanha Viertotie 6',
                 time: 34,
                 numberOfItems: 9,
@@ -92,6 +99,7 @@ export default class extends PureComponent {
             <OrderCell
               orderDetails={{
                 store: 'Lidl',
+                logo: require('../../assets/logo_lidl.png'),
                 location: 'Vierakuja 3',
                 time: 29,
                 numberOfItems: 12,
