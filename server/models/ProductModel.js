@@ -1,15 +1,19 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-  title: String,
+  category: String,
   avgPrice: Number,
   stores: [
     {
-      name: String,
+      storeId: String,
       price: Number,
+      date: String
     },
   ],
-  category: String,
+  size: {
+    value: Number,
+    unit: String
+  }
 });
 
 const Product = mongoose.model('Product', schema);
