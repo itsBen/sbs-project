@@ -2,67 +2,43 @@ import React from 'react'
 import { View, Text, Image, TouchableOpacity, TouchableHighlight } from 'react-native'
 import { Cell } from 'react-native-tableview-simple'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import Swipeable from 'react-native-swipeable';
 
-const rightButtonStyles = {
-  paddingLeft: 20,
-  backgroundColor: '#60d32e',
-  justifyContent: 'center',
-  alignSelf: 'stretch',
-}
-
-const rightButtons = [
-  <TouchableOpacity style={rightButtonStyles}>
-    <Text style={{ height: 132, color: 'white' }}>Reserve</Text>
-  </TouchableOpacity>
-]
-
-export default ({ orderDetails }) => {
+export default ({ orderDetails, onReserveOrder, onOpenDetails, orderId }) => {
   const { store, logo, location, time, numberOfItems, totalPrice, deliveryFee } = orderDetails
   return (
     <Cell
       cellContentView={
-        <Swipeable
-          rightButtons={rightButtons}
-          style={styles.swipeable}
-        >
-          <View style={styles.container}>
-            <View style={{ flex: 1 }}>
-              <Image
-                source={logo}
-                style={styles.image}
-              />
-            </View>
-
-            <View
-              style={{ flex: 4 }}
-            >
-              <Text style={styles.storeTitle}>{store}</Text>
-              <Text style={styles.text}><Icon name="location-on" size={18}/> {location}</Text>
-              <Text style={[ styles.text, styles.timeText ]}><Icon name="access-time" size={18}/> Time left: {time} min</Text>
-              <Text style={styles.text}><Icon name="shopping-cart" size={18}/> {numberOfItems} items worth {totalPrice}</Text>
-            </View>
-            <View
-              style={{ flex: 1 }}
-            >
-              <Text style={styles.deliveryFee}>+ {deliveryFee} €</Text>
-            </View>
+        <TouchableOpacity style={styles.container} onPress={() => onOpenDetails(orderId)}>
+          <View style={{ flex: 1 }}>
+            <Image
+              source={logo}
+              style={styles.image}
+            />
           </View>
-        </Swipeable>
+
+          <View
+            style={{ flex: 4, paddingLeft: 12 }}
+          >
+            <Text style={styles.storeTitle}>{store}</Text>
+            <Text style={styles.text}><Icon name="location-on" size={18}/> {location}</Text>
+            <Text style={[ styles.text, styles.timeText ]}><Icon name="access-time" size={18}/> Time left: {time} min</Text>
+            <Text style={styles.text}><Icon name="shopping-cart" size={18}/> {numberOfItems} items worth {totalPrice}</Text>
+          </View>
+          <View
+            style={{ flex: 1 }}
+          >
+            <Text style={styles.deliveryFee}>+ {deliveryFee} €</Text>
+          </View>
+        </TouchableOpacity>
       }
     />
   )
 }
 
 const styles = {
-  swipeable: {
-    flex: 1,
-    paddingVertical: 10,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
   container: {
     flexDirection: 'row',
+    paddingVertical: 10
   },
   image: {
     width: 50,
