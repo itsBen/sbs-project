@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import CartOverviewContainer from '../../container/CartOverviewContainer';
+import CartOverviewContainer from '../../containers/CartOverviewContainer';
 
 const ModalStack = StackNavigator({
   Cart: {
