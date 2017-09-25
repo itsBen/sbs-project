@@ -1,30 +1,43 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 
 import { defaultPaddings } from '../../config';
 import IconButton from '../IconButton';
 
 export default ({
+  productId,
   title,
-  subtitle,
   price,
   imageSource,
   stores = ['-'],
+  onAddToCart,
+  onOpenDetails,
   ...props
 }) => (
   <View style={styles.container}>
-    <View style={styles.imageContainer}>
-      <Image style={styles.productImage} source={imageSource} />
-    </View>
-    <View style={styles.bodyContainer}>
-      <View style={styles.bodyContent}>
-        <Text style={styles.descriptionTitle}>{title}</Text>
-        <Text style={styles.descriptionSubtitle}>{subtitle}</Text>
+    <TouchableWithoutFeedback onPress={() => onOpenDetails(productId)}>
+      <View style={styles.imageContainer}>
+        <Image style={styles.productImage} source={imageSource} />
       </View>
-      <Text style={styles.bodyFooterText}>Stores: {stores.join(', ')}</Text>
-    </View>
+    </TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={() => onOpenDetails(productId)}>
+      <View style={styles.body}>
+        <Text style={styles.descriptionTitle}>{title}</Text>
+        <Text style={styles.descriptionSubtitle}>{stores.join(', ')}</Text>
+      </View>
+    </TouchableWithoutFeedback>
     <View style={styles.actionsContainer}>
-      <IconButton iconName="add-shopping-cart" label={price} />
+      <IconButton
+        iconName="add-shopping-cart"
+        label={price}
+        onPress={() => onAddToCart(productId)}
+      />
     </View>
   </View>
 );
@@ -41,16 +54,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: defaultPaddings.paddingHorizontal,
   },
   productImage: {
-    width: 100 - 2 * defaultPaddings.paddingHorizontal,
-    height: 80,
+    width: 90 - 2 * defaultPaddings.paddingHorizontal,
+    height: 70,
   },
-  bodyContainer: {
+  body: {
     flex: 1,
-    paddingTop: 10,
     paddingHorizontal: 5,
-  },
-  bodyContent: {
-    flex: 1,
+    justifyContent: 'center',
   },
   descriptionTitle: {
     fontSize: 17,
@@ -58,10 +68,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   descriptionSubtitle: {
-    color: '#808080',
-    fontSize: 14,
-  },
-  bodyFooterText: {
     color: '#808080',
     fontSize: 14,
   },
