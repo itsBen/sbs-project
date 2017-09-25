@@ -18,4 +18,4 @@
 - /stores/:name
 
 - /categories
-- categories/:name
+- /categories/:name
