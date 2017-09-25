@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import BrowseOrdersScreen from '../../container/BrowseOrdersContainer';
+import BrowseOrdersScreen from '@container/BrowseOrdersContainer';
 
 const ModalStack = StackNavigator({
   Browse: {

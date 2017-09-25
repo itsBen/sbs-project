@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import OrdersOverviewContainer from '../../container/OrdersOverviewContainer';
+import OrdersOverviewContainer from '@container/OrdersOverviewContainer';
 
 const ModalStack = StackNavigator({
   Orders: {
