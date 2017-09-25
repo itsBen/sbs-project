@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { ScrollView, StyleSheet, Text, View, Image } from 'react-native';
 import { Section, TableView } from 'react-native-tableview-simple';
 import OrderCell from '../../components/OrderCell'
+import BackgroundImage from '../../components/BackgroundImage'
 
 import { defaultPaddings } from '../../config';
 
@@ -11,12 +12,13 @@ export default class extends PureComponent {
   };
   render() {
     return (
+      <BackgroundImage>
       <ScrollView
         style={styles.container}
         alwaysBounceVertical={false}
       >
         <TableView>
-          <Section>
+          <Section sectionPaddingTop={0} sectionPaddingBottom={0}>
             <OrderCell
               orderDetails={{
                 store: 'Alepa',
@@ -100,12 +102,14 @@ export default class extends PureComponent {
           </Section>
         </TableView>
       </ScrollView>
+    </BackgroundImage>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    paddingVertical: 5
   },
 });

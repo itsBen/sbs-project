@@ -8,6 +8,11 @@ import BrowseOrdersScreen from '../../container/BrowseOrdersContainer';
 const ModalStack = StackNavigator({
   Browse: {
     screen: BrowseOrdersScreen,
+    navigationOptions: () => ({
+      headerStyle: {
+        backgroundColor: 'white'
+      }
+    })
   }
 });
 
@@ -16,7 +21,7 @@ export default class extends Component {
     tabBarLabel: 'Browse',
     // Note: By default the icon is only shown on iOS. Search the showIcon option below.
     tabBarIcon: ({ tintColor }) => (
-      <Icon name="shopping-basket" size={27} color={tintColor} />
+      <Icon name="search" size={27} color={tintColor} />
     ),
   };
   render() {

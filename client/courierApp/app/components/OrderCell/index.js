@@ -5,16 +5,15 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import Swipeable from 'react-native-swipeable';
 
 const rightButtonStyles = {
-  flex: 1,
   paddingLeft: 20,
-  backgroundColor: 'green',
+  backgroundColor: '#60d32e',
+  justifyContent: 'center',
   alignSelf: 'stretch',
-  flexDirection: 'column'
 }
 
 const rightButtons = [
   <TouchableOpacity style={rightButtonStyles}>
-    <Text>Reserve</Text>
+    <Text style={{ height: 132, color: 'white' }}>Reserve</Text>
   </TouchableOpacity>
 ]
 
@@ -57,13 +56,13 @@ export default ({ orderDetails }) => {
 
 const styles = {
   swipeable: {
-    alignItems: 'center',
     flex: 1,
-    paddingVertical: 10
+    paddingVertical: 10,
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   container: {
     flexDirection: 'row',
-    flex: 1
   },
   image: {
     width: 50,

@@ -8,6 +8,11 @@ import ProfileOverviewContainer from '../../container/ProfileOverviewContainer';
 const ModalStack = StackNavigator({
   Profile: {
     screen: ProfileOverviewContainer,
+    navigationOptions: () => ({
+      headerStyle: {
+        backgroundColor: 'white'
+      }
+    })
   },
 });
 
