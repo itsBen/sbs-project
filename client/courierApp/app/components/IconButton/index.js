@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import styles from './styles'
 
 export default ({
   iconName,
@@ -58,23 +59,4 @@ const defaultStyles = {
     marginTop: 5,
     fontSize: 13,
   },
-};
-
-const styles = {
-  default: StyleSheet.create({ ...defaultStyles }),
-  white: StyleSheet.create({
-    container: {
-      ...defaultStyles.container,
-      backgroundColor: 'white',
-      borderColor: '#808080',
-    },
-    icon: {
-      ...defaultStyles.icon,
-      color: '#808080',
-    },
-    label: {
-      ...defaultStyles.label,
-      color: '#808080',
-    },
-  }),
 };
