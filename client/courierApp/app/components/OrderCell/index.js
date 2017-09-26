@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, Image, TouchableOpacity, TouchableHighlight } from 'react-native'
 import { Cell } from 'react-native-tableview-simple'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import moment from 'moment'
 import styles from './styles'
 
 const getLogo = (storeName) => {
@@ -17,8 +18,12 @@ const getLogo = (storeName) => {
   }
 }
 
+const getTime = (timeLimit) => {
+  return moment(timeLimit).fromNow()
+}
+
 export default ({ orderDetails, onPress }) => {
-  const { location, time, numberOfItems, totalPrice, deliveryFee } = orderDetails
+  const { location, timeLimit, numberOfItems, totalPrice, deliveryFee } = orderDetails
   const storeName = orderDetails.store[0].toUpperCase() + orderDetails.store.substr(1)
 
   return (
@@ -37,7 +42,9 @@ export default ({ orderDetails, onPress }) => {
           >
             <Text style={styles.storeTitle}>{storeName}</Text>
             <Text style={styles.text}><Icon name="location-on" size={18}/>Near {location}</Text>
-            <Text style={[ styles.text, styles.timeText ]}><Icon name="access-time" size={18}/> Time left: {time} min</Text>
+            <Text style={[ styles.text, styles.timeText ]}>
+              <Icon name="access-time" size={18}/> Deliver {getTime(timeLimit)}
+            </Text>
             <Text style={styles.text}><Icon name="shopping-cart" size={18}/> {numberOfItems} items worth {totalPrice}</Text>
           </View>
           <View

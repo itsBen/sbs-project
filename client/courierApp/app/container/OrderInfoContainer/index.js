@@ -1,23 +1,35 @@
 import React, {Component} from 'react';
-import { Image, Text, View, ScrollView } from 'react-native';
+import { Image, Text, View, ScrollView, ActivityIndicator } from 'react-native';
 import { TableView, Section, Cell } from 'react-native-tableview-simple'
-import Icon from 'react-native-vector-icons/MaterialIcons'
 import Modal from 'react-native-modal'
+import * as firebase from 'firebase'
+import moment from 'moment'
 
 import styles from './styles'
 import BackgroundImage from '@components/BackgroundImage'
-import Button, { SmallButton } from '@components/Button';
-import IconButton from '@components/IconButton';
 import ProductInfoDialog from '@components/ProductInfoDialog'
+import ListHeaderSection from '@components/ListHeaderSection'
+import OrderDetailsCell from '@components/OrderDetailsCell'
+import Button from '@components/Button';
 
 export default class extends Component {
     state = {
       currentDetailsProductId: null,
+      order: null
     };
 
     constructor(props) {
       super(props);
       this.handleOpenDetails = this.handleOpenDetails.bind(this);
+    }
+
+    componentWillMount() {
+      console.log(this.props.navigation.state.params)
+      const orderId = this.props.navigation.state.params.orderId
+      firebase.database().ref('orders/' + orderId).on('value', (snapshot) => {
+        const order = snapshot.val()
+        this.setState({ order })
+      })
     }
 
     handleOpenDetails(productId) {
@@ -27,6 +39,7 @@ export default class extends Component {
     }
 
     render() {
+      const { order } = this.state
       // Render Modal every time to allow animations
       const renderProductInfoModal = () => (
         <Modal
@@ -43,89 +56,67 @@ export default class extends Component {
       );
     return (
       <BackgroundImage>
-          {renderProductInfoModal()}
-          <ScrollView style={{ flex: 1, alignSelf: 'stretch'}}>
-          <View style={styles.body}>
-            <View style={styles.bodyBody}>
+        {
+          !order ? <ActivityIndicator />
+          :
+          <View style={styles.container}>
+            {renderProductInfoModal()}
+            <ScrollView>
               <TableView>
-                <Section header="Grocery List" footer="Total: 6.80 €">
-                  <Cell
-                    cellStyle="RightDetail"
-                    title="Lactose-free Milk 1200l"
-                    detail=" ~ 1.20 €"
-                    accessory="DisclosureIndicator"
-                    onPress={() => this.handleOpenDetails('12312')}
-                    image={
-                      <Image
-                        style={{ borderRadius: 5 }}
-                        source={{
-                          uri: 'https://facebook.github.io/react/img/logo_og.png',
-                        }}
+                <View style={{ marginBottom: 10 }}>
+                <Section
+                  headerComponent={ListHeaderSection('Grocery List')}
+                  sectionPaddingTop={0}
+                  footer={"Total: " + order.totalPrice + ' €'}
+                >
+                  {
+                    Object.values(order.products).map((product) => (
+                      <Cell
+                        key={product.productId}
+                        cellStyle="RightDetail"
+                        title={product.title}
+                        detail={" ~ " + product.estimatedPrice + " €"}
+                        accessory="DisclosureIndicator"
+                        onPress={() => this.handleOpenDetails(product.productId)}
+                        image={
+                          <Image
+                            style={{ borderRadius: 5 }}
+                            source={{
+                              uri: 'https://facebook.github.io/react/img/logo_og.png',
+                            }}
+                          />
+                        }
                       />
-                    }
-                  />
-                  <Cell
-                    cellStyle="RightDetail"
-                    title="Lactose-free Milk 1200l"
-                    detail=" ~ 1.20 €"
-                    accessory="DisclosureIndicator"
-                    onPress={() => this.handleOpenDetails('12312')}
-                    image={
-                      <Image
-                        style={{ borderRadius: 5 }}
-                        source={{
-                          uri: 'https://facebook.github.io/react/img/logo_og.png',
-                        }}
-                      />
-                    }
-                  />
-                  <Cell
-                    cellStyle="RightDetail"
-                    title="Lactose-free Milk 1200l"
-                    detail=" ~ 1.20 €"
-                    accessory="DisclosureIndicator"
-                    onPress={() => this.handleOpenDetails('12312')}
-                    image={
-                      <Image
-                        style={{ borderRadius: 5 }}
-                        source={{
-                          uri: 'https://facebook.github.io/react/img/logo_og.png',
-                        }}
-                      />
-                    }
-                  />
+                    ))
+                  }
                 </Section>
+              </View>
 
-                <Section header="Delivery Info">
-                  <Cell
-                    cellStyle="Subtitle"
-                    title="Location"
-                    detail="Near Katajanokanranta"
-                  />
-                  <Cell
-                    cellStyle="Subtitle"
-                    title="Deliver by"
-                    detail="Tue 26.09 19:45 (in 40 min)"
-                  />
-                  <Cell
-                    cellStyle="Subtitle"
-                    title="Earn delivery fee"
-                    detail="6 €"
-                  />
-                </Section>
-              </TableView>
-
-
-            </View>
-          </View>
-        </ScrollView>
+              <Section
+                headerComponent={ListHeaderSection('Details')}
+                sectionPaddingTop={0}
+                sectionPaddingBottom={0}
+              >
+                <Cell
+                  cellContentView={OrderDetailsCell('Location', 'Near ' + order.location, 'location-on')}
+                />
+                <Cell
+                  cellContentView={OrderDetailsCell('Deliver by', moment(order.timeLimit).format('MM.DD.YY h:mm a') , 'access-time')}
+                />
+                <Cell
+                  cellContentView={OrderDetailsCell('Earn delivery fee', order.deliveryFee + ' €', 'attach-money')}
+                />
+              </Section>
+            </TableView>
+          </ScrollView>
 
           <View style={styles.footer}>
             <View style={styles.footerBody}>
               <Button title="Reserve Order" />
-              <View style={{ height: 10 }} />
             </View>
+          </View>
         </View>
+        }
       </BackgroundImage>
     )
   }

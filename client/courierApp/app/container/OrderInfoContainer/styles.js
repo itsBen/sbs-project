@@ -3,52 +3,15 @@ import { StyleSheet } from 'react-native'
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: 'rgba(0, 0, 0, 0.1)',
-  },
-  headerContainer: {
-    backgroundColor: 'rgb(230,37,101)',
-    flexDirection: 'row',
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-  },
-  header: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  headerText: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    paddingVertical: 10,
-    color: '#fff',
-  },
-  body: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  bodyBody: {
-    flex: 1,
+    alignSelf: 'stretch'
   },
   footer: {
     flexDirection: 'row',
     paddingHorizontal: 22,
-    paddingBottom: 22,
+    paddingVertical: 10
   },
   footerBody: {
     flex: 1,
-  },
-  imageContainer: {
-    alignItems: 'center',
-    paddingVertical: 20,
-  },
-  image: {
-    width: 120,
-    height: 120,
-    borderRadius: 5,
   },
   pricelabel: {
     fontSize: 19,
