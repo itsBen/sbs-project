@@ -5,8 +5,6 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     borderRadius: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
     borderColor: 'rgba(0, 0, 0, 0.1)',
   },
   headerContainer: {
@@ -14,6 +12,8 @@ export default StyleSheet.create({
     flexDirection: 'row',
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
+    position: 'relative',
+    minHeight: 50
   },
   header: {
     flex: 1,
@@ -38,6 +38,8 @@ export default StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 22,
     paddingBottom: 22,
+    position: 'absolute',
+    bottom: 0
   },
   footerBody: {
     flex: 1,
@@ -79,4 +81,9 @@ export default StyleSheet.create({
   metatableElementValue: {
     color: '#4D4D4D',
   },
+  spinner: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    paddingTop: 70
+  }
 });

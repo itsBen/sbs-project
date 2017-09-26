@@ -30,7 +30,7 @@ export default class extends Component {
             </View>
           </View>
           {
-            !product ? <ActivityIndicator />
+            !product ? <ActivityIndicator size='large' style={styles.spinner}/>
             :
             <View style={styles.body}>
               <View style={styles.bodyBody}>
