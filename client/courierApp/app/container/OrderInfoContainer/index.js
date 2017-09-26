@@ -20,13 +20,13 @@ export default class extends Component {
 
     constructor(props) {
       super(props);
+      this.orderId = this.props.navigation.state.params.orderId
       this.handleOpenDetails = this.handleOpenDetails.bind(this);
+      this.handleReserveOrder = this.handleReserveOrder.bind(this);
     }
 
     componentWillMount() {
-      console.log(this.props.navigation.state.params)
-      const orderId = this.props.navigation.state.params.orderId
-      firebase.database().ref('orders/' + orderId).on('value', (snapshot) => {
+      firebase.database().ref('orders/' + this.orderId).on('value', (snapshot) => {
         const order = snapshot.val()
         this.setState({ order })
       })
@@ -36,6 +36,12 @@ export default class extends Component {
       this.setState({
         currentDetailsProductId: productId,
       });
+    }
+
+    handleReserveOrder() {
+      const ref = firebase.database().ref('orders/' + this.orderId)
+      ref.child('courier').set('me')
+      ref.child('status').set('reserved')
     }
 
     render() {
@@ -111,7 +117,7 @@ export default class extends Component {
 
           <View style={styles.footer}>
             <View style={styles.footerBody}>
-              <Button title="Reserve Order" />
+              <Button title="Reserve Order" onPress={this.handleReserveOrder}/>
             </View>
           </View>
         </View>
