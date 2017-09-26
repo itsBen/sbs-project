@@ -49,7 +49,6 @@ export default class extends Component {
         >
           <ProductInfoDialog
             productId={this.state.currentDetailsProductId}
-            size="bla"
             onClose={() => this.setState({ currentDetailsProductId: null })}
           />
         </Modal>
