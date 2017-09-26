@@ -4,7 +4,7 @@ import Modal from 'react-native-modal';
 import { Separator } from 'react-native-tableview-simple';
 import { connect } from 'react-redux';
 
-import { getAllProducts } from '../../actions';
+import { addToCart, getAllProducts } from '../../actions';
 import { getProductsByCategoryId } from '../../reducers';
 import ProductCell from '../../components/ProductCell';
 import AddToCartDialog from '../../components/AddToCartDialog';
@@ -17,14 +17,15 @@ class Container extends PureComponent {
   constructor(props) {
     super(props);
     this.handleOpenDetails = this.handleOpenDetails.bind(this);
+    this.handleAddToCart = this.handleAddToCart.bind(this);
   }
 
   componentWillMount() {
-    this.props.dispatch(getAllProducts());
+    this.props.getAllProducts();
   }
 
-  handleAddToCart() {
-    console.log('bla!');
+  handleAddToCart(productId) {
+    this.props.addToCart(productId);
   }
 
   handleOpenDetails(productDetails) {
@@ -68,7 +69,7 @@ class Container extends PureComponent {
           keyExtractor={(item, index) => item.id}
           renderItem={({ item, separators }) => (
             <ProductCell
-              onAddToCart={() => this.handleAddToCart(item)}
+              onAddToCart={() => this.handleAddToCart(item.id)}
               onOpenDetails={() => this.handleOpenDetails(item)}
               productId={item.id}
               price={item.price}
@@ -97,4 +98,6 @@ const mapStateToProps = (state, currentProps) => ({
   ),
 });
 
-export default connect(mapStateToProps)(Container);
+export default connect(mapStateToProps, { addToCart, getAllProducts })(
+  Container
+);

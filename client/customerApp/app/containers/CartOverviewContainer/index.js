@@ -3,12 +3,14 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { TableView, Section, Cell } from 'react-native-tableview-simple';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { connect } from 'react-redux';
 
+import { getTotal, getCartProducts } from '../../reducers';
 import { defaultPaddings } from '../../config';
 import Button from '../../components/Button';
 import UpdateOrderDialog from '../../components/UpdateOrderDialog';
 
-export default class extends PureComponent {
+class Container extends PureComponent {
   navigationOptions = {
     title: 'Cart',
   };
@@ -57,7 +59,7 @@ export default class extends PureComponent {
           alwaysBounceVertical={false}
         >
           <TableView>
-            <Section header="CURRENT CART" sectionTintColor="#E9E9EF">
+            <Section header="LIDL" sectionTintColor="#E9E9EF">
               <Cell
                 accessory="DisclosureIndicator"
                 cellStyle="RightDetail"
@@ -71,6 +73,8 @@ export default class extends PureComponent {
                 title="Ruisleipä 500g"
                 detail="1.50 €"
               />
+            </Section>
+            <Section header="K-MARKET" sectionTintColor="#E9E9EF">
               <Cell
                 accessory="DisclosureIndicator"
                 cellStyle="RightDetail"
@@ -121,3 +125,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: defaultPaddings.paddingHorizontal,
   },
 });
+
+const mapStateToProps = state => ({
+  products: getCartProducts(state),
+  total: getTotal(state),
+});
+
+export default connect(mapStateToProps)(Container);

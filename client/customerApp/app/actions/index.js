@@ -7,7 +7,7 @@ const requestCategories = () => ({
 });
 const receiveCategories = categories => ({
   type: types.RECEIVE_CATEGORIES,
-  categories: categories,
+  categories,
 });
 
 export const getAllCategories = () => dispatch => {
@@ -31,4 +31,16 @@ export const getAllProducts = () => dispatch => {
   shop.getProducts(products => {
     dispatch(receiveProducts(products));
   });
+};
+
+// CART
+const addToCartAction = productId => ({
+  type: types.ADD_TO_CART,
+  productId,
+});
+
+export const addToCart = productId => (dispatch, getState) => {
+  if (getState().products.byId[productId]) {
+    dispatch(addToCartAction(productId));
+  }
 };
