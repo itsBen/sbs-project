@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import reducer from './reducers';
-import { getAllCategories } from './actions';
+import { fetchAllCategories } from './actions';
 import App from './App';
 
 const middleware = [thunk];
@@ -14,7 +14,7 @@ if (__DEV__) {
 
 const store = createStore(reducer, applyMiddleware(...middleware));
 
-store.dispatch(getAllCategories());
+store.dispatch(fetchAllCategories());
 
 export default () => (
   <Provider store={store}>

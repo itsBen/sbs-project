@@ -10,15 +10,16 @@ const receiveCategories = categories => ({
   categories,
 });
 
-export const getAllCategories = () => dispatch => {
+export const fetchAllCategories = () => dispatch => {
   dispatch(requestCategories());
-  shop.getCategories(categories => {
+
+  shop.getProductCategories(categories => {
     dispatch(receiveCategories(categories));
   });
 };
 
 // PRODUCTS
-const requestProducts = () => ({
+const requestProducts = categoryId => ({
   type: types.REQUEST_PRODUCTS,
 });
 const receiveProducts = products => ({
@@ -26,9 +27,10 @@ const receiveProducts = products => ({
   products: products,
 });
 
-export const getAllProducts = () => dispatch => {
+export const fetchProductsByCategoryId = categoryId => dispatch => {
   dispatch(requestProducts());
-  shop.getProducts(products => {
+
+  shop.getProductsByCategory((products, categoryId) => {
     dispatch(receiveProducts(products));
   });
 };

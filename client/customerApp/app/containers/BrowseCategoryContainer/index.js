@@ -4,7 +4,7 @@ import Modal from 'react-native-modal';
 import { Separator } from 'react-native-tableview-simple';
 import { connect } from 'react-redux';
 
-import { addToCart, getAllProducts } from '../../actions';
+import { addToCart, fetchProductsByCategoryId } from '../../actions';
 import { getProductsByCategoryId } from '../../reducers';
 import ProductCell from '../../components/ProductCell';
 import AddToCartDialog from '../../components/AddToCartDialog';
@@ -21,7 +21,9 @@ class Container extends PureComponent {
   }
 
   componentWillMount() {
-    this.props.getAllProducts();
+    this.props.fetchProductsByCategoryId(
+      this.props.navigation.state.params.categoryId
+    );
   }
 
   handleAddToCart(productId) {
@@ -61,6 +63,7 @@ class Container extends PureComponent {
         />
       </Modal>
     );
+    console.log(this.props.products);
     return (
       <View style={{ flex: 1 }}>
         {renderAddToCartModal()}
@@ -73,7 +76,7 @@ class Container extends PureComponent {
               onOpenDetails={() => this.handleOpenDetails(item)}
               productId={item.id}
               price={item.price}
-              title={item.title}
+              title={item.name}
               stores={['Lidl']}
               imageSource={{
                 uri: 'https://facebook.github.io/react/img/logo_og.png',
@@ -98,6 +101,7 @@ const mapStateToProps = (state, currentProps) => ({
   ),
 });
 
-export default connect(mapStateToProps, { addToCart, getAllProducts })(
-  Container
-);
+export default connect(mapStateToProps, {
+  addToCart,
+  fetchProductsByCategoryId,
+})(Container);

@@ -21,12 +21,14 @@ class Container extends PureComponent {
             key={category.id}
             onPress={() =>
               this.props.navigation.navigate('BrowseCategory', {
-                title: category.title,
+                title: category.name,
                 categoryId: category.id,
               })}
-            label={category.title}
+            label={category.name}
             imageSource={{
-              uri: category.iconURL,
+              uri:
+                category.iconURL ||
+                'https://facebook.github.io/react/img/logo_og.png',
             }}
           />
         ))}
