@@ -7,7 +7,6 @@ import * as firebase from 'firebase'
 // Internal
 import OrderCell from '@components/OrderCell'
 import BackgroundImage from '@components/BackgroundImage'
-import OrderInfoDialog from '@components/OrderInfoDialog'
 
 import { defaultPaddings } from '../../config';
 
@@ -17,13 +16,11 @@ export default class extends PureComponent {
   };
 
   state = {
-    orders: null,
-    currentDetailsOrderId: null
+    orders: null
   };
 
   constructor(props) {
     super(props);
-    this.handleOpenDetails = this.handleOpenDetails.bind(this);
   }
 
   componentWillMount() {
@@ -33,35 +30,9 @@ export default class extends PureComponent {
     })
   }
 
-  handleReserveOrder() {
-    console.log('reserved order!');
-  }
-
-  handleOpenDetails(OrderId) {
-    this.setState({
-      currentDetailsOrderId: OrderId,
-    });
-  }
-
   render() {
-    const renderOrderDetailsModal = () => (
-      <Modal
-        isVisible={!!this.state.currentDetailsOrderId}
-        animationIn={'slideInRight'}
-        animationOut={'slideOutRight'}
-      >
-        <OrderInfoDialog
-          orderId={this.state.currentDetailsOrderId}
-          size="bla"
-          onReserveOrder={this.handleReserveOrder}
-          onClose={() => this.setState({ currentDetailsOrderId: null })}
-        />
-      </Modal>
-    );
-
     return (
       <BackgroundImage>
-        {renderOrderDetailsModal()}
         <ScrollView
           style={styles.container}
           alwaysBounceVertical={false}
@@ -74,10 +45,10 @@ export default class extends PureComponent {
                 { this.state.orders.map((order) => (
                   <OrderCell
                     key={order.orderId}
-                    onReserveOrder={this.handleReserveOrder}
-                    onOpenDetails={this.handleOpenDetails}
-                    orderId={order.orderId}
                     orderDetails={order}
+                    onPress={
+                      () => this.props.navigation.navigate('OrderInfo', { store: order.store, orderId: order.orderId } )
+                    }
                   />
                 ))}
               </Section>

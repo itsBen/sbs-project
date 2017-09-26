@@ -3,11 +3,11 @@ import { Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import OrdersOverviewContainer from '@container/OrdersOverviewContainer';
+import MyOrdersOverviewContainer from '@container/MyOrdersOverviewContainer';
 
 const ModalStack = StackNavigator({
-  Orders: {
-    screen: OrdersOverviewContainer,
+  MyOrders: {
+    screen: MyOrdersOverviewContainer,
     navigationOptions: () => ({
       headerStyle: {
         backgroundColor: 'white'
@@ -18,7 +18,7 @@ const ModalStack = StackNavigator({
 
 export default class extends Component {
   static navigationOptions = {
-    tabBarLabel: 'Orders',
+    tabBarLabel: 'My Orders',
     // Note: By default the icon is only shown on iOS. Search the showIcon option below.
     tabBarIcon: ({ tintColor }) => (
       <Icon name="reorder" size={27} color={tintColor} />

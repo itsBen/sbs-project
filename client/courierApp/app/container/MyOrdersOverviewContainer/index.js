@@ -35,7 +35,7 @@ const Screen = () => (
 );
 
 Screen.navigationOptions = {
-  title: 'Orders',
+  title: 'My Orders',
 };
 
 export default Screen;

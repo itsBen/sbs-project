@@ -5,7 +5,7 @@ import * as firebase from 'firebase'
 
 import { firebaseConfig } from './config'
 import BrowseScene from '@scenes/BrowseScene';
-import OrdersScene from '@scenes/OrdersScene';
+import MyOrdersScene from '@scenes/MyOrdersScene';
 import ProfileScene from '@scenes/ProfileScene';
 import OnBoardingScene from '@scenes/OnBoardingScene';
 
@@ -16,8 +16,8 @@ export default TabNavigator(
     Browse: {
       screen: BrowseScene,
     },
-    Orders: {
-      screen: OrdersScene,
+    MyOrders: {
+      screen: MyOrdersScene,
     },
     Profile: {
       screen: ProfileScene,
