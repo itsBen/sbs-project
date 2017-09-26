@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
-import { ScrollView, StyleSheet, Text, View, Image } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Image, ActivityIndicator } from 'react-native';
 import { Section, TableView } from 'react-native-tableview-simple';
 import Modal from 'react-native-modal'
+import * as firebase from 'firebase'
 
 // Internal
 import OrderCell from '@components/OrderCell'
@@ -16,12 +17,20 @@ export default class extends PureComponent {
   };
 
   state = {
-    currentDetailsOrderId: null,
+    orders: null,
+    currentDetailsOrderId: null
   };
 
   constructor(props) {
     super(props);
     this.handleOpenDetails = this.handleOpenDetails.bind(this);
+  }
+
+  componentWillMount() {
+    firebase.database().ref('orders/').on('value', (snapshot) => {
+      const orders = snapshot.val()
+      this.setState({ orders: Object.values(orders) })
+    })
   }
 
   handleReserveOrder() {
@@ -57,122 +66,23 @@ export default class extends PureComponent {
           style={styles.container}
           alwaysBounceVertical={false}
         >
-        <TableView>
-          <Section sectionPaddingTop={0} sectionPaddingBottom={0}>
-            <OrderCell
-              onReserveOrder={this.handleReserveOrder}
-              onOpenDetails={this.handleOpenDetails}
-              orderId="0001"
-              orderDetails={{
-                store: 'Alepa',
-                logo: require('@assets/logo_alepa.png'),
-                location: 'Near Amiraalinkatu',
-                time: 10,
-                numberOfItems: 5,
-                totalPrice: 8.99,
-                deliveryFee: 5
-              }}
-            />
-            <OrderCell
-              onReserveOrder={this.handleReserveOrder}
-              onOpenDetails={this.handleOpenDetails}
-              orderId="0002"
-              orderDetails={{
-                store: 'K-Market',
-                logo: require('@assets/logo_kmarket.png'),
-                location: 'Near Siltakuja',
-                time: 8,
-                numberOfItems: 12,
-                totalPrice: 34.89,
-                deliveryFee: 6
-              }}
-            />
-            <OrderCell
-              onReserveOrder={this.handleReserveOrder}
-              onOpenDetails={this.handleOpenDetails}
-              orderId="0003"
-              orderDetails={{
-                store: 'S-Market',
-                logo: require('@assets/logo_kmarket.png'),
-                location: 'Near Vanha Viertotie',
-                time: 34,
-                numberOfItems: 9,
-                totalPrice: 15.60,
-                deliveryFee: 8
-              }}
-            />
-            <OrderCell
-              onReserveOrder={this.handleReserveOrder}
-              onOpenDetails={this.handleOpenDetails}
-              orderId="0004"
-              orderDetails={{
-                store: 'Lidl',
-                logo: require('@assets/logo_lidl.png'),
-                location: 'Near Vierakuja',
-                time: 29,
-                numberOfItems: 12,
-                totalPrice: 23.50,
-                deliveryFee: 11
-              }}
-            />
-            <OrderCell
-              onReserveOrder={this.handleReserveOrder}
-              onOpenDetails={this.handleOpenDetails}
-              orderId="0005"
-              orderDetails={{
-                store: 'Alepa',
-                logo: require('@assets/logo_alepa.png'),
-                location: 'Near Amiraalinkatu',
-                time: 10,
-                numberOfItems: 5,
-                totalPrice: 8.99,
-                deliveryFee: 5
-              }}
-            />
-            <OrderCell
-              onReserveOrder={this.handleReserveOrder}
-              onOpenDetails={this.handleOpenDetails}
-              orderId="0006"
-              orderDetails={{
-                store: 'K-Market',
-                logo: require('@assets/logo_kmarket.png'),
-                location: 'Near Siltakatu',
-                time: 8,
-                numberOfItems: 12,
-                totalPrice: 34.89,
-                deliveryFee: 6
-              }}
-            />
-            <OrderCell
-              onReserveOrder={this.handleReserveOrder}
-              onOpenDetails={this.handleOpenDetails}
-              orderId="0009"
-              orderDetails={{
-                store: 'S-Market',
-                logo: require('@assets/logo_kmarket.png'),
-                location: 'Near Pikku Huopalahti',
-                time: 34,
-                numberOfItems: 9,
-                totalPrice: 15.60,
-                deliveryFee: 8
-              }}
-            />
-            <OrderCell
-              onReserveOrder={this.handleReserveOrder}
-              onOpenDetails={this.handleOpenDetails}
-              orderId="0006"
-              orderDetails={{
-                store: 'Lidl',
-                logo: require('@assets/logo_lidl.png'),
-                location: 'Near Kirkkokatu',
-                time: 29,
-                numberOfItems: 12,
-                totalPrice: 23.50,
-                deliveryFee: 11
-              }}
-            />
-          </Section>
-        </TableView>
+          {
+            !this.state.orders ? <ActivityIndicator size='large' style={styles.spinner}/>
+            :
+            <TableView>
+              <Section sectionPaddingTop={0} sectionPaddingBottom={0}>
+                { this.state.orders.map((order) => (
+                  <OrderCell
+                    key={order.orderId}
+                    onReserveOrder={this.handleReserveOrder}
+                    onOpenDetails={this.handleOpenDetails}
+                    orderId={order.orderId}
+                    orderDetails={order}
+                  />
+                ))}
+              </Section>
+            </TableView>
+          }
       </ScrollView>
     </BackgroundImage>
     );
@@ -183,4 +93,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
+  spinner: {
+    flex: 1,
+    paddingTop: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
