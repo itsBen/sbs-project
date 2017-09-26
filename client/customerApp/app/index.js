@@ -1,36 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import { createLogger } from 'redux-logger';
+import thunk from 'redux-thunk';
+import reducer from './reducers';
+import { getAllCategories } from './actions';
+import App from './App';
 
-import { TabNavigator } from 'react-navigation';
+const middleware = [thunk];
+if (__DEV__) {
+  middleware.push(createLogger());
+}
 
-import BrowseScene from './scenes/BrowseScene';
-import CartScene from './scenes/CartScene';
-import OrdersScene from './scenes/OrdersScene';
-import ProfileScene from './scenes/ProfileScene';
-import OnBoardingScene from './scenes/OnBoardingScene';
+const store = createStore(reducer, applyMiddleware(...middleware));
 
-export default TabNavigator(
-  {
-    Browse: {
-      screen: BrowseScene,
-    },
-    Cart: {
-      screen: CartScene,
-    },
-    OrdersScene: {
-      screen: OrdersScene,
-    },
-    ProfileScene: {
-      screen: ProfileScene,
-    },
-  },
-  {
-    tabBarPosition: 'bottom',
-    animationEnabled: false,
-    tabBarOptions: {
-      activeTintColor: '#e91e63',
-      labelStyle: {
-        fontSize: 12,
-      },
-    },
-  }
+store.dispatch(getAllCategories());
+
+export default () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
 );

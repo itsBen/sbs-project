@@ -3,11 +3,11 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 
 import Button, { SmallButton } from '../Button';
 
-export default ({ onClose, onAddToCart }) => (
+export default ({ productTitle, productPrice, onClose, onAddToCart }) => (
   <View style={styles.container}>
     <View style={styles.headerContainer}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Fat free Milk</Text>
+        <Text style={styles.headerText}>{productTitle}</Text>
       </View>
     </View>
     <View style={styles.body}>
@@ -19,7 +19,7 @@ export default ({ onClose, onAddToCart }) => (
           />
         </View>
 
-        <Text style={styles.pricelabel}>1.75 €</Text>
+        <Text style={styles.pricelabel}>{productPrice}</Text>
 
         <View style={styles.metatable}>
           <View style={styles.metatableElement}>
