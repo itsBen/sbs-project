@@ -1,22 +1,36 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import { Section } from 'react-native-tableview-simple'
 
-export default (title) => {
+export default ({ header, children, ...props }) => {
   return (
-    <View style={styles.containerStyle}>
-      <Text style={styles.textStyle}>{title}</Text>
+    <View style={styles.container}>
+      <Section
+        headerComponent={
+          <View style={styles.headerContainer}>
+            <Text style={styles.headerText}>{header}</Text>
+          </View>
+        }
+        sectionPaddingTop={0}
+        {... props}
+      >
+        {children}
+      </Section>
     </View>
   )
 }
 
 const styles = {
-  containerStyle: {
+  container: {
+    marginBottom: 10
+  },
+  headerContainer: {
     backgroundColor: '#efefef',
     padding: 10,
-    borderColor: '#3a3a3a'
+    borderWidth: 0
   },
-  textStyle: {
+  headerText: {
     fontSize: 17,
-    fontWeight: '500'
+    fontWeight: '400'
   }
 }

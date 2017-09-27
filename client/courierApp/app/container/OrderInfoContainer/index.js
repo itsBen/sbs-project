@@ -27,7 +27,7 @@ export default class extends Component {
     }
 
     componentWillMount() {
-      firebase.database().ref('orders/' + this.orderId).on('value', (snapshot) => {
+      firebase.database().ref('allOrders/pending/' + this.orderId).on('value', (snapshot) => {
         const order = snapshot.val()
         this.setState({ order })
       })
@@ -83,38 +83,34 @@ export default class extends Component {
             {renderProductInfoModal()}
             <ScrollView>
               <TableView>
-                <View style={{ marginBottom: 10 }}>
-                <Section
-                  headerComponent={ListHeaderSection('Grocery List')}
-                  sectionPaddingTop={0}
-                  footer={"Total: " + order.totalPrice + ' €'}
-                >
-                  {
-                    Object.values(order.products).map((product) => (
-                      <Cell
-                        key={product.productId}
-                        cellStyle="RightDetail"
-                        title={product.title}
-                        detail={" ~ " + product.estimatedPrice + " €"}
-                        accessory="DisclosureIndicator"
-                        onPress={() => this.handleOpenDetails(product.productId)}
-                        image={
-                          <Image
-                            style={{ borderRadius: 5 }}
-                            source={{
-                              uri: 'https://facebook.github.io/react/img/logo_og.png',
-                            }}
-                          />
-                        }
-                      />
-                    ))
-                  }
-                </Section>
-              </View>
+              <ListHeaderSection
+                header='Grocery List'
+                footer={"Total: " + order.totalPrice + ' €'}
+              >
+                {
+                  Object.values(order.products).map((product) => (
+                    <Cell
+                      key={product.productId}
+                      cellStyle="RightDetail"
+                      title={product.title}
+                      detail={" ~ " + product.estimatedPrice + " €"}
+                      accessory="DisclosureIndicator"
+                      onPress={() => this.handleOpenDetails(product.productId)}
+                      image={
+                        <Image
+                          style={{ borderRadius: 5 }}
+                          source={{
+                            uri: 'https://facebook.github.io/react/img/logo_og.png',
+                          }}
+                        />
+                      }
+                    />
+                  ))
+                }
+              </ListHeaderSection>
 
-              <Section
-                headerComponent={ListHeaderSection('Details')}
-                sectionPaddingTop={0}
+              <ListHeaderSection
+                header='Details'
                 sectionPaddingBottom={0}
               >
                 <Cell
@@ -126,7 +122,7 @@ export default class extends Component {
                 <Cell
                   cellContentView={OrderDetailsCell('Earn delivery fee', order.deliveryFee + ' €', 'attach-money')}
                 />
-              </Section>
+              </ListHeaderSection>
             </TableView>
           </ScrollView>
 
