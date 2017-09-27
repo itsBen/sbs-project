@@ -35,7 +35,7 @@ export default ({
     <View style={styles.actionsContainer}>
       <IconButton
         iconName="add-shopping-cart"
-        label={price}
+        label={`${price} €`}
         onPress={onAddToCart}
       />
     </View>
