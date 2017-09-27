@@ -63,7 +63,6 @@ class Container extends PureComponent {
         />
       </Modal>
     );
-    console.log(this.props.products);
     return (
       <View style={{ flex: 1 }}>
         {renderAddToCartModal()}
