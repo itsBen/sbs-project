@@ -29,7 +29,7 @@ export default StyleSheet.create({
   body: {
     flex: 1,
     flexDirection: 'row',
-    paddingHorizontal: 22,
+    paddingHorizontal: 0,
   },
   bodyBody: {
     flex: 1,

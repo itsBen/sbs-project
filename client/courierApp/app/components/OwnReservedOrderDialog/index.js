@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import * as firebase from 'firebase'
+import { TableView, Section, Cell } from 'react-native-tableview-simple'
 
 import Button, { SmallButton } from '../Button';
 import styles from './styles'
+import CheckBox from '../CheckBox'
+import ListHeaderSection from '../ListHeaderSection'
 
 export default class extends Component {
   render() {
@@ -29,15 +32,31 @@ export default class extends Component {
 
                 <Text style={styles.pricelabel}>{order.totalPrice} €</Text>
 
-                <View style={styles.metatable}>
-                  {
-                    Object.values(order.products).map((product) => {
-                      return (
-                        <Text key={product.productId}>{product.title}</Text>
-                      )
-                    })
-                  }
-                </View>
+                <TableView>
+                  <Section
+                    header="Grocery List"
+                    sectionPaddingBottom={0}
+                    footer={'Total ' + order.totalPrice + 'e'}
+                  >
+                    {
+                      Object.values(order.products).map((product) => {
+                        return (
+                          <Cell
+                            cellContentView={
+                              <View style={{flexDirection: 'row', alignItems: 'center'}} key={product.productId}>
+                                <CheckBox />
+                                <Text>{product.title} - {product.estimatedPrice} e</Text>
+                              </View>
+                            }
+                          />
+                        )
+                      })
+                    }
+
+                  </Section>
+
+                </TableView>
+
               </View>
             </View>
           }
