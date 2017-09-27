@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Image, Text, View, ScrollView, ActivityIndicator } from 'react-native';
+import { Image, Text, View, ScrollView, ActivityIndicator, Alert } from 'react-native';
 import { TableView, Section, Cell } from 'react-native-tableview-simple'
 import Modal from 'react-native-modal'
 import * as firebase from 'firebase'
@@ -15,7 +15,8 @@ import Button from '@components/Button';
 export default class extends Component {
     state = {
       currentDetailsProductId: null,
-      order: null
+      order: null,
+      disabled: null
     };
 
     constructor(props) {
@@ -39,9 +40,23 @@ export default class extends Component {
     }
 
     handleReserveOrder() {
-      const ref = firebase.database().ref('orders/' + this.orderId)
-      ref.child('courier').set('me')
-      ref.child('status').set('reserved')
+      this.setState({ disabled: true })
+      const newOrder = Object.assign(this.state.order, { courier: 'me', status: 'reserved'} )
+      firebase.database().ref('allOrders/reserved/' + this.orderId).set(newOrder)
+      firebase.database().ref('courierOrders/' + 'uidme' + '/reserved/' + this.orderId).set(this.state.order)
+      firebase.database().ref('allOrders/pending/' + this.orderId).set({})
+      this.alertReservedOrder()
+    }
+
+    alertReservedOrder() {
+      Alert.alert(
+        'Reserved',
+        'You just reserved this order, keep track of your orders in my orders tab',
+        [
+          {text: 'OK', onPress: () => this.props.navigation.goBack()},
+        ],
+        { cancelable: false }
+      )
     }
 
     render() {
@@ -117,7 +132,7 @@ export default class extends Component {
 
           <View style={styles.footer}>
             <View style={styles.footerBody}>
-              <Button title="Reserve Order" onPress={this.handleReserveOrder}/>
+              <Button title="Reserve Order" disabled={this.state.disabled} onPress={this.handleReserveOrder}/>
             </View>
           </View>
         </View>

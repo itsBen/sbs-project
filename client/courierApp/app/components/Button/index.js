@@ -3,13 +3,16 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export { default as SmallButton } from './SmallButton';
 
-export default ({ title, onPress, buttonStyle }) => (
-  <TouchableOpacity onPress={onPress}>
+export default ({ title, onPress, buttonStyle, disabled }) => (
+  <TouchableOpacity onPress={onPress} disabled={disabled}>
     <View
       style={
-        styles[buttonStyle]
-          ? styles[buttonStyle].container
-          : styles.default.container
+        [
+          styles[buttonStyle]
+            ? styles[buttonStyle].container
+            : styles.default.container ,
+          disabled && styles.default.disabledButton
+        ]
       }
     >
       <Text
@@ -37,6 +40,10 @@ const defaultStyles = {
     color: '#FFF',
     fontSize: 18,
   },
+  disabledButton: {
+    backgroundColor: '#c1c1c1',
+    borderColor: 'transparent'
+  }
 };
 
 const styles = {
