@@ -63,7 +63,7 @@ class Screen extends Component {
       'Order',
       'Order marked as purchased',
       [
-        {text: 'OK', onPress: () => this.setState({ selectedOwnOrder: null })},
+        {text: 'OK', onPress: () => this.setState({ selectedOwnOrder: null, selectedOrderStatus: null })},
       ],
       { cancelable: false }
     )

@@ -38,7 +38,7 @@ export default class extends Component {
     tabBarIcon: ({ tintColor }) => (
       <Icon name="search" size={27} color={tintColor} />
     ),
-  };
+  }
   render() {
     return <ModalStack />;
   }
