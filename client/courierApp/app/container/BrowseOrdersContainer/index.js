@@ -26,7 +26,8 @@ export default class extends PureComponent {
   componentWillMount() {
     firebase.database().ref('allOrders/pending/').on('value', (snapshot) => {
       const orders = snapshot.val()
-      this.setState({ orders: Object.values(orders) })
+      if(orders)
+        this.setState({ orders: Object.values(orders) })
     })
   }
 

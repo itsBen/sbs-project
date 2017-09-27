@@ -29,7 +29,8 @@ export default class extends Component {
     componentWillMount() {
       firebase.database().ref('allOrders/pending/' + this.orderId).on('value', (snapshot) => {
         const order = snapshot.val()
-        this.setState({ order })
+        if (order)
+          this.setState({ order })
       })
     }
 

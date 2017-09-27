@@ -12,6 +12,8 @@ export default ({ header, children, ...props }) => {
           </View>
         }
         sectionPaddingTop={0}
+        sectionTintColor='#F624591A'
+        footerTextColor='#fff'
         {... props}
       >
         {children}
@@ -25,12 +27,13 @@ const styles = {
     marginBottom: 10
   },
   headerContainer: {
-    backgroundColor: '#efefef',
+    backgroundColor: '#F624598C',
     padding: 10,
     borderWidth: 0
   },
   headerText: {
     fontSize: 17,
+    color: '#fff',
     fontWeight: '400'
   }
 }
