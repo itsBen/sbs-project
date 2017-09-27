@@ -4,7 +4,7 @@ import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import BrowseOrdersScreen from '@container/BrowseOrdersContainer';
-import OrderInfoScreen from '@container/OrderInfoContainer';
+import BrowseOrderInfoScreen from '@container/BrowseOrderInfoContainer';
 
 const ModalStack = StackNavigator({
   Browse: {
@@ -16,12 +16,12 @@ const ModalStack = StackNavigator({
     })
   },
   OrderInfo: {
-    screen: OrderInfoScreen,
+    screen: BrowseOrderInfoScreen,
     navigationOptions: ({ navigation }) => {
       const params = navigation.state.params
       return ({
         title: `${params
-          ? params.store[0].toUpperCase() + params.store.substr(1)
+          ? params.order.store[0].toUpperCase() + params.order.store.substr(1)
           : 'Product'}`,
         headerStyle: {
           backgroundColor: 'white'

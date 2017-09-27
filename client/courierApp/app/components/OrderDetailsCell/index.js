@@ -8,7 +8,7 @@ export default (label, info, iconName) => {
         <Text style={styles.labelText}>
           <Icon name={iconName} color="#353535" size={14}/> {label}
         </Text>
-        <Text style={styles.infoText}>{info}</Text>
+        <Text style={styles.infoText}>{info && info[0].toUpperCase() + info.substr(1)}</Text>
     </View>
   )
 }

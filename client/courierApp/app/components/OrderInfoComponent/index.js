@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Image, Text, View, ScrollView, ActivityIndicator, Alert } from 'react-native';
+import { Image, Text, View, ScrollView, Alert } from 'react-native';
 import { TableView, Section, Cell } from 'react-native-tableview-simple'
 import Modal from 'react-native-modal'
 import * as firebase from 'firebase'
@@ -7,6 +7,7 @@ import moment from 'moment'
 
 import styles from './styles'
 import BackgroundImage from '@components/BackgroundImage'
+import Spinner from '@components/Spinner'
 import ProductInfoDialog from '@components/ProductInfoDialog'
 import ListHeaderSection from '@components/ListHeaderSection'
 import OrderDetailsCell from '@components/OrderDetailsCell'
@@ -15,23 +16,11 @@ import Button from '@components/Button';
 export default class extends Component {
     state = {
       currentDetailsProductId: null,
-      order: null,
-      disabled: null
     };
 
     constructor(props) {
       super(props);
-      this.orderId = this.props.navigation.state.params.orderId
       this.handleOpenDetails = this.handleOpenDetails.bind(this);
-      this.handleReserveOrder = this.handleReserveOrder.bind(this);
-    }
-
-    componentWillMount() {
-      firebase.database().ref('allOrders/pending/' + this.orderId).on('value', (snapshot) => {
-        const order = snapshot.val()
-        if (order)
-          this.setState({ order })
-      })
     }
 
     handleOpenDetails(productId) {
@@ -40,28 +29,8 @@ export default class extends Component {
       });
     }
 
-    handleReserveOrder() {
-      this.setState({ disabled: true })
-      const newOrder = Object.assign(this.state.order, { courier: 'me', status: 'reserved'} )
-      firebase.database().ref('allOrders/reserved/' + this.orderId).set(newOrder)
-      firebase.database().ref('courierOrders/' + 'uidme' + '/reserved/' + this.orderId).set(this.state.order)
-      firebase.database().ref('allOrders/pending/' + this.orderId).set({})
-      this.alertReservedOrder()
-    }
-
-    alertReservedOrder() {
-      Alert.alert(
-        'Reserved',
-        'You just reserved this order, keep track of your orders in my orders tab',
-        [
-          {text: 'OK', onPress: () => this.props.navigation.goBack()},
-        ],
-        { cancelable: false }
-      )
-    }
-
     render() {
-      const { order } = this.state
+      const { order, buttonDisabled } = this.props
       // Render Modal every time to allow animations
       const renderProductInfoModal = () => (
         <Modal
@@ -78,7 +47,7 @@ export default class extends Component {
     return (
       <BackgroundImage>
         {
-          !order ? <ActivityIndicator />
+          !order ? <Spinner />
           :
           <View style={styles.container}>
             {renderProductInfoModal()}
@@ -123,15 +92,28 @@ export default class extends Component {
                 <Cell
                   cellContentView={OrderDetailsCell('Earn delivery fee', order.deliveryFee + ' €', 'attach-money')}
                 />
+                <Cell
+                  cellContentView={OrderDetailsCell('Status', order.status, 'info')}
+                />
+                {
+                  order.purchasedAt
+                    && <Cell
+                      cellContentView={OrderDetailsCell('Purchased at', moment(order.purchasedAt).format('MM.DD.YY h:mm a'), 'shopping-basket')}
+                    />
+                }
               </ListHeaderSection>
             </TableView>
           </ScrollView>
 
-          <View style={styles.footer}>
-            <View style={styles.footerBody}>
-              <Button title="Reserve Order" disabled={this.state.disabled} onPress={this.handleReserveOrder}/>
-            </View>
-          </View>
+          {
+            !this.props.hideButton
+              && <View style={styles.footer}>
+                <View style={styles.footerBody}>
+                  <Button title={this.props.buttonText} disabled={this.props.buttonDisabled} onPress={this.props.onButtonPress}/>
+                </View>
+              </View>
+          }
+
         </View>
         }
       </BackgroundImage>

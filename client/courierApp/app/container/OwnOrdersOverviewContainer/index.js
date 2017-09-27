@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import { View, Text, ActivityIndicator, Alert } from 'react-native'
+import { View, Text, Alert } from 'react-native'
 import * as firebase from 'firebase'
 import moment from 'moment'
 import Modal from 'react-native-modal'
-import { TableView, Section, Cell } from 'react-native-tableview-simple';
+import { TableView, Section, Cell } from 'react-native-tableview-simple'
 
-import BackgroundImage from '@components/BackgroundImage';
+import BackgroundImage from '@components/BackgroundImage'
+import Spinner from '@components/Spinner'
 import ListHeaderSection from '@components/ListHeaderSection'
-import OwnReservedOrderDialog from '@components/OwnReservedOrderDialog'
 import OwnPurchasedOrderDialog from '@components/OwnPurchasedOrderDialog'
 import OwnDeliveredOrderDialog from '@components/OwnDeliveredOrderDialog'
 
@@ -29,14 +29,11 @@ const MyOrdersOverviewCell = ({ order, ...props }) => (
 
 class Screen extends Component {
   state = {
-    ownOrders: null,
-    selectedOwnOrder: null,
-    selectedOrderStatus: null
+    ownOrders: null
   }
 
   constructor(props) {
     super(props)
-    this.handleOpenDetails = this.handleOpenDetails.bind(this)
   }
 
   componentWillMount() {
@@ -49,79 +46,9 @@ class Screen extends Component {
     })
   }
 
-  handlePurchasedOrder(order) {
-    const uid = 'uidme'
-    const newOrder = Object.assign(order, { status: 'purchased' })
-    const courierOrdersRef = firebase.database().ref('courierOrders/' + uid)
-    courierOrdersRef.child('purchased/' + order.orderId).set(newOrder)
-    courierOrdersRef.child('reserved/' + order.orderId).set({})
-    this.alertPurchasedOrder()
-  }
-
-  alertPurchasedOrder() {
-    Alert.alert(
-      'Order',
-      'Order marked as purchased',
-      [
-        {text: 'OK', onPress: () => this.setState({ selectedOwnOrder: null, selectedOrderStatus: null })},
-      ],
-      { cancelable: false }
-    )
-  }
-
-  handleOpenDetails(order, status) {
-    this.setState({
-      selectedOwnOrder: order,
-      selectedOrderStatus: status
-    });
-  }
-
   render() {
-    const renderReservedOrderModal = () => (
-      <Modal
-        isVisible={this.state.selectedOrderStatus === 'reserved'}
-        animationIn={'slideInRight'}
-        animationOut={'slideOutRight'}
-      >
-        <OwnReservedOrderDialog
-          order={this.state.selectedOwnOrder}
-          handlePurchasedOrder={() => this.handlePurchasedOrder(this.state.selectedOwnOrder)}
-          onClose={() => this.setState({ selectedOwnOrder: null, selectedOrderStatus: null })}
-        />
-      </Modal>
-    )
-
-    const renderPurchasedOrderModal = () => (
-      <Modal
-        isVisible={this.state.selectedOrderStatus === 'purchased'}
-        animationIn={'slideInRight'}
-        animationOut={'slideOutRight'}
-      >
-        <OwnPurchasedOrderDialog
-          order={this.state.selectedOwnOrder}
-          onClose={() => this.setState({ selectedOwnOrder: null, selectedOrderStatus: null })}
-        />
-      </Modal>
-    )
-
-    const renderDeliveredOrderModal = () => (
-      <Modal
-        isVisible={this.state.selectedOrderStatus === 'delivered'}
-        animationIn={'slideInRight'}
-        animationOut={'slideOutRight'}
-      >
-        <OwnDeliveredOrderDialog
-          order={this.state.selectedOwnOrder}
-          onClose={() => this.setState({ selectedOwnOrder: null, selectedOrderStatus: null })}
-        />
-      </Modal>
-    )
-
     return (
       <BackgroundImage>
-        {renderReservedOrderModal()}
-        {renderPurchasedOrderModal()}
-        {renderDeliveredOrderModal()}
         <TableView>
           <ListHeaderSection
             header="In Delivery"
@@ -136,11 +63,11 @@ class Screen extends Component {
                     key={order.orderId}
                     order={order}
                     title={'Deliver ' + moment(order.timeLimit).fromNow()}
-                    onPress={() => this.handleOpenDetails(order, 'reserved')}
+                    onPress={() => this.props.navigation.navigate('OrderInfo', { order: order, hideButton: false })}
                   />
                 ))
                 : <NoneViewCell />
-                : <ActivityIndicator />
+                : <Spinner />
             }
           </ListHeaderSection>
 
@@ -157,11 +84,11 @@ class Screen extends Component {
                     key={order.orderId}
                     order={order}
                     title={'Deliver ' + moment(order.timeLimit).fromNow()}
-                    onPress={() => this.handleOpenDetails(order, 'purchased')}
+                    onPress={() => this.props.navigation.navigate('OrderInfo', { order: order, hideButton: true })}
                   />
                 ))
                 : <NoneViewCell />
-                : <ActivityIndicator />
+                : <Spinner />
             }
           </ListHeaderSection>
 
@@ -178,11 +105,11 @@ class Screen extends Component {
                     key={order.orderId}
                     order={order}
                     title={'Delivered ' + moment(order.timeLimit)}
-                    onPress={() => this.handleOpenDetails(order, 'delivered')}
+                    onPress={() => this.props.navigation.navigate('OrderInfo', { order: order, hideButton: true })}
                   />
                 ))
                 : <NoneViewCell />
-                : <ActivityIndicator />
+                : <Spinner />
             }
           </ListHeaderSection>
         </TableView>
