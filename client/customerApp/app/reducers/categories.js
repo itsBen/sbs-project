@@ -10,7 +10,8 @@ const byId = (state = {}, action) => {
       return {
         ...state,
         ...action.categories.reduce((obj, category) => {
-          obj[category.id] = category;
+          obj[category.sys.id] = category.fields;
+          obj[category.sys.id]['id'] = category.sys.id;
           return obj;
         }, {}),
       };

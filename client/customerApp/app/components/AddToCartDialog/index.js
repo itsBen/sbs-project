@@ -19,7 +19,7 @@ export default ({ productTitle, productPrice, onClose, onAddToCart }) => (
           />
         </View>
 
-        <Text style={styles.pricelabel}>{productPrice}</Text>
+        <Text style={styles.pricelabel}>{`${productPrice} €`}</Text>
 
         <View style={styles.metatable}>
           <View style={styles.metatableElement}>
