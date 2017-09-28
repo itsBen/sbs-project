@@ -21,12 +21,12 @@ export default ({
   ...props
 }) => (
   <View style={styles.container}>
-    <TouchableWithoutFeedback onPress={() => onOpenDetails(productId)}>
+    <TouchableWithoutFeedback onPress={onOpenDetails}>
       <View style={styles.imageContainer}>
         <Image style={styles.productImage} source={imageSource} />
       </View>
     </TouchableWithoutFeedback>
-    <TouchableWithoutFeedback onPress={() => onOpenDetails(productId)}>
+    <TouchableWithoutFeedback onPress={onOpenDetails}>
       <View style={styles.body}>
         <Text style={styles.descriptionTitle}>{title}</Text>
         <Text style={styles.descriptionSubtitle}>{stores.join(', ')}</Text>
@@ -35,8 +35,8 @@ export default ({
     <View style={styles.actionsContainer}>
       <IconButton
         iconName="add-shopping-cart"
-        label={price}
-        onPress={() => onAddToCart(productId)}
+        label={`${price} €`}
+        onPress={onAddToCart}
       />
     </View>
   </View>

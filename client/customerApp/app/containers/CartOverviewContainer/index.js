@@ -3,12 +3,14 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { TableView, Section, Cell } from 'react-native-tableview-simple';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { connect } from 'react-redux';
 
+import { getTotal, getCartProducts } from '../../reducers';
 import { defaultPaddings } from '../../config';
 import Button from '../../components/Button';
 import UpdateOrderDialog from '../../components/UpdateOrderDialog';
 
-export default class extends PureComponent {
+class Container extends PureComponent {
   navigationOptions = {
     title: 'Cart',
   };
@@ -26,9 +28,9 @@ export default class extends PureComponent {
     console.log('bla!');
   }
 
-  handleOpenDetails(productId) {
+  handleOpenDetails(productDetails) {
     this.setState({
-      currentDetailsProductId: productId,
+      currentProductDetails: productDetails,
     });
   }
 
@@ -36,18 +38,22 @@ export default class extends PureComponent {
     // Render Modal every time to allow animations
     const renderUpdateOrderModal = () => (
       <Modal
-        isVisible={!!this.state.currentDetailsProductId}
+        isVisible={!!this.state.currentProductDetails}
         animationIn={'slideInRight'}
         animationOut={'slideOutRight'}
       >
         <UpdateOrderDialog
-          productId={this.state.currentDetailsProductId}
+          productId={this.state.currentProductDetails}
           size="bla"
           onUpdateOrder={this.handleUpdateOrder}
-          onClose={() => this.setState({ currentDetailsProductId: null })}
+          onClose={() => this.setState({ currentProductDetails: null })}
         />
       </Modal>
     );
+
+    const cartProductsTotal = parseFloat(this.props.cartTotal);
+    const deliveryCosts = 2.85;
+    const totalCosts = cartProductsTotal + deliveryCosts;
 
     return (
       <View style={styles.container}>
@@ -57,26 +63,17 @@ export default class extends PureComponent {
           alwaysBounceVertical={false}
         >
           <TableView>
-            <Section header="CURRENT CART" sectionTintColor="#E9E9EF">
-              <Cell
-                accessory="DisclosureIndicator"
-                cellStyle="RightDetail"
-                title="2 x Lactose free milk"
-                detail="0.89 € / Unit"
-                onPress={() => this.handleOpenDetails(12)}
-              />
-              <Cell
-                accessory="DisclosureIndicator"
-                cellStyle="RightDetail"
-                title="Ruisleipä 500g"
-                detail="1.50 €"
-              />
-              <Cell
-                accessory="DisclosureIndicator"
-                cellStyle="RightDetail"
-                title="Lactose free milk"
-                detail="0.89 €"
-              />
+            <Section header="LIDL" sectionTintColor="#E9E9EF">
+              {this.props.cartProducts.map((product, index) => (
+                <Cell
+                  key={index}
+                  accessory="DisclosureIndicator"
+                  cellStyle="RightDetail"
+                  title={`${product.quantity} x ${product.name}`}
+                  detail={`${(product.quantity * product.price).toFixed(2)} €`}
+                  onPress={() => this.handleOpenDetails(product)}
+                />
+              ))}
             </Section>
             <Section
               header="SUMMARY"
@@ -86,13 +83,13 @@ export default class extends PureComponent {
               <Cell
                 cellStyle="RightDetail"
                 title="Estimated cost of groceries"
-                detail="4.17 €"
+                detail={`${cartProductsTotal} €`}
               />
               <Cell
                 accessory="Detail"
                 cellStyle="RightDetail"
                 title="Estimated cost for delivery"
-                detail="2.85 €"
+                detail={`${deliveryCosts} €`}
               />
               <Cell
                 accessory="DisclosureIndicator"
@@ -104,7 +101,7 @@ export default class extends PureComponent {
           </TableView>
         </ScrollView>
         <View style={styles.footer}>
-          <Button title="Place Order for 7.02 €" />
+          <Button title={`Place Order for maximum ${totalCosts} €`} />
         </View>
       </View>
     );
@@ -121,3 +118,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: defaultPaddings.paddingHorizontal,
   },
 });
+
+const mapStateToProps = state => ({
+  cartProducts: getCartProducts(state),
+  cartTotal: getTotal(state),
+});
+
+export default connect(mapStateToProps)(Container);
