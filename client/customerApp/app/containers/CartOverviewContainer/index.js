@@ -9,6 +9,7 @@ import { getTotal, getCartProducts } from '../../reducers';
 import { defaultPaddings } from '../../config';
 import Button from '../../components/Button';
 import UpdateOrderDialog from '../../components/UpdateOrderDialog';
+import firebase from '../../api/firebase';
 
 class Container extends PureComponent {
   navigationOptions = {
@@ -22,6 +23,7 @@ class Container extends PureComponent {
   constructor(props) {
     super(props);
     this.handleOpenDetails = this.handleOpenDetails.bind(this);
+    this.handleOrderRequest = this.handleOrderRequest.bind(this);
   }
 
   handleUpdateOrder() {
@@ -32,6 +34,44 @@ class Container extends PureComponent {
     this.setState({
       currentProductDetails: productDetails,
     });
+  }
+
+  handleOrderRequest() {
+    const refByKey = 'allOrders/pending';
+    //const refByCustomerId = `customerIrders/byCustomerId/001`;
+    const key = firebase
+      .database()
+      .ref(refByKey)
+      .push().key;
+
+    const productData = this.props.cartProducts.map(product => {
+      return {
+        name: product.name,
+        price: product.price,
+        productId: product.id,
+      };
+    });
+
+    const orderData = {
+      location: 'Here',
+      orderId: key,
+      products: productData,
+      status: 'pending',
+      store: 'LIDL',
+      timeLimit: '2017-09-28T13:44:14+03:00',
+      deliveryFee: 2.85,
+    };
+
+    const updates = {};
+    //updates[`${refByCustomerId}/${key}`] = orderData;
+    updates[`${refByKey}/${key}`] = orderData;
+
+    firebase
+      .database()
+      .ref()
+      .update(updates)
+      .then(() => this.setState({ isSaving: false, error: null }))
+      .catch(error => this.setState({ isSaving: false, error }));
   }
 
   render() {
@@ -101,7 +141,10 @@ class Container extends PureComponent {
           </TableView>
         </ScrollView>
         <View style={styles.footer}>
-          <Button title={`Place Order for maximum ${totalCosts} €`} />
+          <Button
+            title={`Place Order for maximum ${totalCosts} €`}
+            onPress={this.handleOrderRequest}
+          />
         </View>
       </View>
     );

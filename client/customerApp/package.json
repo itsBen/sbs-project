@@ -19,6 +19,7 @@
 	},
 	"dependencies": {
 		"contentful": "^4.6.2",
+		"firebase": "^4.4.0",
 		"react": "16.0.0-alpha.12",
 		"react-native": "0.48.3",
 		"react-native-modal": "^4.0.0",
