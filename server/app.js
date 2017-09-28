@@ -8,7 +8,6 @@ const passport = require('passport');
 
 const routes = require('./routes/routes');
 const mongoose = require('mongoose');
-const config = require('./config/config');
 const passportConfig = require('./config/passport');
 
 passportConfig(passport);
@@ -30,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect(config.mongoDBUrl);
+mongoose.connect(process.env.MONGODB_URI);
 
 routes(app, passport);
 
