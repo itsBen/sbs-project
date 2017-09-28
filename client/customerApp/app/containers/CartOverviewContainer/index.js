@@ -53,7 +53,7 @@ class Container extends PureComponent {
 
     const cartProductsTotal = parseFloat(this.props.cartTotal);
     const deliveryCosts = 2.85;
-    const totalCosts = cartProductsTotal + deliveryCosts;
+    const totalCosts = (cartProductsTotal + deliveryCosts).toFixed(2);
 
     return (
       <View style={styles.container}>
