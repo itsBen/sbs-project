@@ -1,6 +1,6 @@
 # ShopBuddy
 
-**A project from Software-Business-Startup at Metropolia University of Applied Sciences, Finland**
+*A project from Software-Business-Startup at Metropolia University of Applied Sciences, Finland*
 
 ## Notes about architecture
 
