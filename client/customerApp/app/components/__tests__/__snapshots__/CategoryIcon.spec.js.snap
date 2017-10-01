@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  collapsable={undefined}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  nativeID={undefined}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "paddingVertical": 10,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://facebook.github.io/react/img/logo_og.png",
+        }
+      }
+      style={
+        Object {
+          "borderRadius": 50,
+          "height": 100,
+          "marginBottom": 10,
+          "width": 100,
+        }
+      }
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontSize": 20,
+        }
+      }
+    >
+      Label
+    </Text>
+  </View>
+</View>
+`;

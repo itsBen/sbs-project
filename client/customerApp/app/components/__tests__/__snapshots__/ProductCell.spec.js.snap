@@ -1,0 +1,194 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#fff",
+      "flexDirection": "row",
+      "paddingVertical": 10,
+    }
+  }
+>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    hitSlop={undefined}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "justifyContent": "center",
+        "paddingHorizontal": 15,
+        "width": 100,
+      }
+    }
+    testID={undefined}
+  >
+    <Image
+      source={
+        Object {
+          "uri": "https://facebook.github.io/react/img/logo_og.png",
+        }
+      }
+      style={
+        Object {
+          "height": 70,
+          "width": 60,
+        }
+      }
+    />
+  </View>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    hitSlop={undefined}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "center",
+        "paddingHorizontal": 5,
+      }
+    }
+    testID={undefined}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontSize": 17,
+          "fontWeight": "600",
+          "marginBottom": 5,
+        }
+      }
+    >
+      Title
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#808080",
+          "fontSize": 14,
+        }
+      }
+    >
+      Lidl
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "justifyContent": "center",
+        "paddingRight": 15,
+        "width": 75,
+      }
+    }
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "rgb(230,37,101)",
+            "borderColor": "rgb(230,37,101)",
+            "borderRadius": 5,
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "paddingHorizontal": 5,
+            "paddingVertical": 5,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={false}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 20,
+              },
+              Object {
+                "color": "#fff",
+              },
+              Object {
+                "fontFamily": "Material Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+            ]
+          }
+        >
+          
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#fff",
+              "fontSize": 13,
+              "fontWeight": "bold",
+              "marginTop": 5,
+            }
+          }
+        >
+          2.50 €
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
