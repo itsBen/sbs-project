@@ -1,4 +1,4 @@
-# Customer App
+# Courier App
 
 
 ## Requirements
