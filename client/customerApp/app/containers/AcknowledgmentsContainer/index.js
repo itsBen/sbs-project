@@ -12,7 +12,6 @@ export default class extends Component {
 
   render() {
     const renderEntry = (entry, key) => {
-      console.log(entry);
       return (
         <View style={styles.entry} key={key}>
           {entry.fields.url ? (

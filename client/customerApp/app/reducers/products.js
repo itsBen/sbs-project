@@ -7,13 +7,8 @@ const byId = (state = {}, action) => {
       return {
         ...state,
         ...action.products.reduce((obj, product) => {
-          obj[product.sys.id] = Object.assign({}, product.fields, {
-            categories: undefined,
-          });
-          obj[product.sys.id]['categoryIds'] = product.fields.categories.map(
-            category => category.sys.id
-          );
-          obj[product.sys.id]['id'] = product.sys.id;
+          obj[product.id] = product;
+          obj[product.id].price = product.price.toFixed(2);
           return obj;
         }, {}),
       };

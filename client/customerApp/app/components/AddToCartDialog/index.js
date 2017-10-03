@@ -3,7 +3,13 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 
 import Button, { SmallButton } from '../Button';
 
-export default ({ productTitle, productPrice, onClose, onAddToCart }) => (
+export default ({
+  productTitle,
+  productImageSource,
+  productPrice,
+  onClose,
+  onAddToCart,
+}) => (
   <View style={styles.container}>
     <View style={styles.headerContainer}>
       <View style={styles.header}>
@@ -13,10 +19,7 @@ export default ({ productTitle, productPrice, onClose, onAddToCart }) => (
     <View style={styles.body}>
       <View style={styles.bodyBody}>
         <View style={styles.imageContainer}>
-          <Image
-            style={styles.image}
-            source={{ uri: 'https://facebook.github.io/react/img/logo_og.png' }}
-          />
+          <Image style={styles.image} source={productImageSource} />
         </View>
 
         <Text style={styles.pricelabel}>{`${productPrice} €`}</Text>

@@ -4,23 +4,28 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import Button, { SmallButton } from '../Button';
 import IconButton from '../IconButton';
 
-export default ({ onClose, onUpdateOrder, onAddToCart, onRemoveFromCart }) => (
+export default ({
+  productTitle,
+  productPrice,
+  productImageSource,
+  onClose,
+  onUpdateOrder,
+  onAddToCart,
+  onRemoveFromCart,
+}) => (
   <View style={styles.container}>
     <View style={styles.headerContainer}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Fat free Milk</Text>
+        <Text style={styles.headerText}>{productTitle}</Text>
       </View>
     </View>
     <View style={styles.body}>
       <View style={styles.bodyBody}>
         <View style={styles.imageContainer}>
-          <Image
-            style={styles.image}
-            source={{ uri: 'https://facebook.github.io/react/img/logo_og.png' }}
-          />
+          <Image style={styles.image} source={productImageSource} />
         </View>
 
-        <Text style={styles.pricelabel}>1.75 €</Text>
+        <Text style={styles.pricelabel}>{`${productPrice} €`}</Text>
         <View style={styles.quantitySelector}>
           <IconButton iconName="remove-circle-outline" colorScheme="white" />
           <Text style={styles.quantitySelector_value}>1</Text>

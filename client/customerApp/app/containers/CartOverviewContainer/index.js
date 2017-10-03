@@ -98,7 +98,28 @@ class Container extends PureComponent {
         animationOut={'slideOutRight'}
       >
         <UpdateOrderDialog
-          productId={this.state.currentProductDetails}
+          productTitle={
+            !!this.state.currentProductDetails &&
+            this.state.currentProductDetails.hasOwnProperty('title')
+              ? this.state.currentProductDetails.title
+              : 'Product Details'
+          }
+          productPrice={
+            !!this.state.currentProductDetails &&
+            this.state.currentProductDetails.hasOwnProperty('price')
+              ? this.state.currentProductDetails.price
+              : 'No Information'
+          }
+          productImageSource={
+            !!this.state.currentProductDetails &&
+            this.state.currentProductDetails.hasOwnProperty('photoUrl') &&
+            this.state.currentProductDetails.photoUrl.hasOwnProperty('file')
+              ? {
+                  uri: `https:${this.state.currentProductDetails.photoUrl.file
+                    .url}`,
+                }
+              : null
+          }
           size="bla"
           onUpdateOrder={this.handleUpdateOrder}
           onClose={() => this.setState({ currentProductDetails: null })}

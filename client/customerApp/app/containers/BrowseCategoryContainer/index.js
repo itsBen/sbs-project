@@ -65,6 +65,16 @@ class Container extends PureComponent {
               ? this.state.currentProductDetails.price
               : 'No Information'
           }
+          productImageSource={
+            !!this.state.currentProductDetails &&
+            this.state.currentProductDetails.hasOwnProperty('photoUrl') &&
+            this.state.currentProductDetails.photoUrl.hasOwnProperty('file')
+              ? {
+                  uri: `https:${this.state.currentProductDetails.photoUrl.file
+                    .url}`,
+                }
+              : null
+          }
           size="bla"
           onAddToCart={() =>
             this.handleAddToCart(this.state.currentProductDetails)}
@@ -86,9 +96,13 @@ class Container extends PureComponent {
               price={item.price}
               title={item.name}
               stores={['Lidl']}
-              imageSource={{
-                uri: 'https://facebook.github.io/react/img/logo_og.png',
-              }}
+              imageSource={
+                item.photoUrl && item.photoUrl.hasOwnProperty('file')
+                  ? {
+                      uri: `https:${item.photoUrl.file.url}`,
+                    }
+                  : null
+              }
               onHighlightRow={separators.highlight}
               onUnHighlightRow={separators.unhighlight}
             />
