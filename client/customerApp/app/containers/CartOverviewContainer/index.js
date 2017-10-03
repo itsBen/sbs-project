@@ -5,7 +5,7 @@ import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 
-import { removeFromCart } from '../../actions';
+import { updateQuantityOnCart, removeFromCart } from '../../actions';
 import { getTotal, getCartProducts } from '../../reducers';
 import { defaultPaddings } from '../../config';
 import Button from '../../components/Button';
@@ -26,10 +26,17 @@ class Container extends PureComponent {
     this.handleOpenDetails = this.handleOpenDetails.bind(this);
     this.handleOrderRequest = this.handleOrderRequest.bind(this);
     this.handleRemoveOrder = this.handleRemoveOrder.bind(this);
+    this.handleUpdateQuantity = this.handleUpdateQuantity.bind(this);
   }
 
-  handleUpdateOrder() {
-    console.log('bla!');
+  handleUpdateQuantity(quantity) {
+    this.props.updateQuantityOnCart(
+      this.state.currentProductDetails.id,
+      quantity
+    );
+    this.setState({
+      currentProductDetails: null,
+    });
   }
 
   handleOpenDetails(productDetails) {
@@ -90,6 +97,7 @@ class Container extends PureComponent {
   }
 
   render() {
+    console.log(this.state.currentProductDetails);
     // Render Modal every time to allow animations
     const renderUpdateOrderModal = () => (
       <Modal
@@ -121,7 +129,13 @@ class Container extends PureComponent {
               : null
           }
           size="bla"
-          onUpdateOrder={this.handleUpdateOrder}
+          quantity={
+            !!this.state.currentProductDetails &&
+            this.state.currentProductDetails.hasOwnProperty('quantity')
+              ? this.state.currentProductDetails.quantity
+              : 1
+          }
+          onUpdateQuantity={this.handleUpdateQuantity}
           onClose={() => this.setState({ currentProductDetails: null })}
           onRemoveFromCart={() =>
             this.handleRemoveOrder(this.state.currentProductDetails.id)}
@@ -226,4 +240,5 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   removeFromCart,
+  updateQuantityOnCart,
 })(Container);
