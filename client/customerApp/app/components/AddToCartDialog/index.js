@@ -42,7 +42,7 @@ export default ({ productTitle, productPrice, onClose, onAddToCart }) => (
     </View>
     <View style={styles.footer}>
       <View style={styles.footerBody}>
-        <Button title="Add to Cart" onPress={() => onAddToCart()} />
+        <Button title="Add to Cart" onPress={onAddToCart} />
         <View style={{ height: 10 }} />
         <SmallButton title="Cancel" buttonStyle="white" onPress={onClose} />
       </View>

@@ -4,7 +4,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import Button, { SmallButton } from '../Button';
 import IconButton from '../IconButton';
 
-export default ({ onClose, onAddToCart }) => (
+export default ({ onClose, onUpdateOrder, onAddToCart, onRemoveFromCart }) => (
   <View style={styles.container}>
     <View style={styles.headerContainer}>
       <View style={styles.header}>
@@ -48,7 +48,13 @@ export default ({ onClose, onAddToCart }) => (
     </View>
     <View style={styles.footer}>
       <View style={styles.footerBody}>
-        <Button title="Update Order" onPress={() => onUpdateOrder()} />
+        <Button title="Update Order" onPress={onUpdateOrder} />
+        <View style={{ height: 10 }} />
+        <SmallButton
+          title="Remove Order"
+          buttonStyle="white"
+          onPress={onRemoveFromCart}
+        />
         <View style={{ height: 10 }} />
         <SmallButton title="Cancel" buttonStyle="white" onPress={onClose} />
       </View>
@@ -103,8 +109,8 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   image: {
-    width: 120,
-    height: 120,
+    width: 90,
+    height: 90,
     borderRadius: 5,
   },
   pricelabel: {

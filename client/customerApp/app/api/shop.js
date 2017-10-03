@@ -10,13 +10,21 @@ const contentfulCredentials = {
   resolveLinks: false,
 };
 
+// Returns Promise
+export const getLicenses = () =>
+  contentful
+    .createClient(contentfulCredentials)
+    .getEntries({ content_type: 'licenses' });
+
 const getProductCategories = cb => {
   contentful
     .createClient(contentfulCredentials)
     .getEntries({
       content_type: 'productCategory',
+      include: 1,
     })
     .then(entries => {
+      console.log(entries);
       cb(entries.items);
     });
 };

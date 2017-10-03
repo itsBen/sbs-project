@@ -40,9 +40,19 @@ const addToCartAction = productId => ({
   type: types.ADD_TO_CART,
   productId,
 });
+const removeFromCartAction = (productId, quantity) => ({
+  type: types.REMOVE_FROM_CART,
+  productId,
+});
 
 export const addToCart = productId => (dispatch, getState) => {
   if (getState().products.byId[productId]) {
     dispatch(addToCartAction(productId));
+  }
+};
+
+export const removeFromCart = (productId, quantity) => (dispatch, getState) => {
+  if (Object.values(getState().cart.addedIds).includes(productId)) {
+    dispatch(removeFromCartAction(productId));
   }
 };
