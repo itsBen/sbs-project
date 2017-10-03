@@ -40,9 +40,14 @@ const addToCartAction = productId => ({
   type: types.ADD_TO_CART,
   productId,
 });
-const removeFromCartAction = (productId, quantity) => ({
+const removeFromCartAction = productId => ({
   type: types.REMOVE_FROM_CART,
   productId,
+});
+const updateQuantityOnCartAction = (productId, quantity) => ({
+  type: types.UPDATE_QUANTITY_ON_CART,
+  productId,
+  quantity,
 });
 
 export const addToCart = productId => (dispatch, getState) => {
@@ -51,8 +56,20 @@ export const addToCart = productId => (dispatch, getState) => {
   }
 };
 
-export const removeFromCart = (productId, quantity) => (dispatch, getState) => {
+export const removeFromCart = productId => (dispatch, getState) => {
   if (Object.values(getState().cart.addedIds).includes(productId)) {
     dispatch(removeFromCartAction(productId));
+  }
+};
+
+export const updateQuantityOnCart = (productId, quantity) => (
+  dispatch,
+  getState
+) => {
+  if (getState().cart.quantityById[productId] && quantity < 1) {
+    return dispatch(removeFromCartAction(productId));
+  }
+  if (Object.values(getState().cart.addedIds).includes(productId)) {
+    dispatch(updateQuantityOnCartAction(productId, quantity));
   }
 };

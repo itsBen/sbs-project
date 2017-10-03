@@ -1,71 +1,105 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
 import Button, { SmallButton } from '../Button';
 import IconButton from '../IconButton';
 
-export default ({
-  productTitle,
-  productPrice,
-  productImageSource,
-  onClose,
-  onUpdateOrder,
-  onAddToCart,
-  onRemoveFromCart,
-}) => (
-  <View style={styles.container}>
-    <View style={styles.headerContainer}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>{productTitle}</Text>
-      </View>
-    </View>
-    <View style={styles.body}>
-      <View style={styles.bodyBody}>
-        <View style={styles.imageContainer}>
-          <Image style={styles.image} source={productImageSource} />
-        </View>
+export default class extends PureComponent {
+  state = {
+    quantity: this.props.quantity || 0,
+    priceTotal: this.props.productPrice * this.props.quantity,
+  };
 
-        <Text style={styles.pricelabel}>{`${productPrice} €`}</Text>
-        <View style={styles.quantitySelector}>
-          <IconButton iconName="remove-circle-outline" colorScheme="white" />
-          <Text style={styles.quantitySelector_value}>1</Text>
-          <IconButton iconName="add-circle-outline" colorScheme="white" />
-        </View>
+  setQuantity = quantity => {
+    if (quantity < 0) return;
+    this.setState({
+      quantity,
+      priceTotal: this.props.productPrice * quantity,
+    });
+  };
 
-        <View style={styles.metatable}>
-          <View style={styles.metatableElement}>
-            <Text style={styles.metatableElementLabel}>Size</Text>
-            <Text style={styles.metatableElementValue}>0.5 l</Text>
+  render() {
+    const {
+      productTitle,
+      productPrice,
+      productImageSource,
+      onClose,
+      onUpdateQuantity,
+      onAddToCart,
+      onRemoveFromCart,
+    } = this.props;
+
+    return (
+      <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <View style={styles.header}>
+            <Text style={styles.headerText}>{productTitle}</Text>
           </View>
-          <View style={styles.metatableElement}>
-            <Text style={styles.metatableElementLabel}>Manufacturer</Text>
-            <Text style={styles.metatableElementValue}>Valimo</Text>
+        </View>
+        <View style={styles.body}>
+          <View style={styles.bodyBody}>
+            <View style={styles.imageContainer}>
+              <Image style={styles.image} source={productImageSource} />
+            </View>
+
+            <Text style={styles.pricelabel}>{`${this.state.priceTotal.toFixed(
+              2
+            )} €`}</Text>
+            <View style={styles.quantitySelector}>
+              <IconButton
+                iconName="remove-circle-outline"
+                colorScheme="white"
+                onPress={() => this.setQuantity(this.state.quantity - 1)}
+              />
+              <Text style={styles.quantitySelector_value}>
+                {this.state.quantity}
+              </Text>
+              <IconButton
+                iconName="add-circle-outline"
+                colorScheme="white"
+                onPress={() => this.setQuantity(this.state.quantity + 1)}
+              />
+            </View>
+
+            <View style={styles.metatable}>
+              <View style={styles.metatableElement}>
+                <Text style={styles.metatableElementLabel}>Size</Text>
+                <Text style={styles.metatableElementValue}>0.5 l</Text>
+              </View>
+              <View style={styles.metatableElement}>
+                <Text style={styles.metatableElementLabel}>Manufacturer</Text>
+                <Text style={styles.metatableElementValue}>Valimo</Text>
+              </View>
+              <View style={styles.metatableElement}>
+                <Text style={styles.metatableElementLabel}>Ingredients</Text>
+                <Text style={styles.metatableElementValue}>
+                  Lorem ipsum doter iter lokter fuht wers gasd birte sniope neqs
+                  cunvxs corniclres
+                </Text>
+              </View>
+            </View>
           </View>
-          <View style={styles.metatableElement}>
-            <Text style={styles.metatableElementLabel}>Ingredients</Text>
-            <Text style={styles.metatableElementValue}>
-              Lorem ipsum doter iter lokter fuht wers gasd birte sniope neqs
-              cunvxs corniclres
-            </Text>
+        </View>
+        <View style={styles.footer}>
+          <View style={styles.footerBody}>
+            <Button
+              title="Update Order"
+              onPress={() => onUpdateQuantity(this.state.quantity)}
+            />
+            <View style={{ height: 10 }} />
+            <SmallButton
+              title="Remove Order"
+              buttonStyle="white"
+              onPress={onRemoveFromCart}
+            />
+            <View style={{ height: 10 }} />
+            <SmallButton title="Cancel" buttonStyle="white" onPress={onClose} />
           </View>
         </View>
       </View>
-    </View>
-    <View style={styles.footer}>
-      <View style={styles.footerBody}>
-        <Button title="Update Order" onPress={onUpdateOrder} />
-        <View style={{ height: 10 }} />
-        <SmallButton
-          title="Remove Order"
-          buttonStyle="white"
-          onPress={onRemoveFromCart}
-        />
-        <View style={{ height: 10 }} />
-        <SmallButton title="Cancel" buttonStyle="white" onPress={onClose} />
-      </View>
-    </View>
-  </View>
-);
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
