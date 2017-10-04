@@ -7,6 +7,7 @@
 		"test": "jest"
 	},
 	"dependencies": {
+		"contentful": "^4.6.2",
 		"firebase": "^4.4.0",
 		"moment": "^2.18.1",
 		"react": "16.0.0-alpha.12",

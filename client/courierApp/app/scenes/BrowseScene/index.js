@@ -5,30 +5,29 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import BrowseOrdersScreen from '@container/BrowseOrdersContainer';
 import BrowseOrderInfoScreen from '@container/BrowseOrderInfoContainer';
+import { capitalize } from '@utilities';
 
 const ModalStack = StackNavigator({
   Browse: {
     screen: BrowseOrdersScreen,
     navigationOptions: () => ({
       headerStyle: {
-        backgroundColor: 'white'
-      }
-    })
+        backgroundColor: 'white',
+      },
+    }),
   },
   OrderInfo: {
     screen: BrowseOrderInfoScreen,
     navigationOptions: ({ navigation }) => {
-      const params = navigation.state.params
-      return ({
-        title: `${params
-          ? params.order.store[0].toUpperCase() + params.order.store.substr(1)
-          : 'Product'}`,
+      const params = navigation.state.params;
+      return {
+        title: `${params ? capitalize(params.order.store) : 'Product'}`,
         headerStyle: {
-          backgroundColor: 'white'
-        }
-      })
-    }
-  }
+          backgroundColor: 'white',
+        },
+      };
+    },
+  },
 });
 
 export default class extends Component {
@@ -38,7 +37,8 @@ export default class extends Component {
     tabBarIcon: ({ tintColor }) => (
       <Icon name="search" size={27} color={tintColor} />
     ),
-  }
+  };
+
   render() {
     return <ModalStack />;
   }

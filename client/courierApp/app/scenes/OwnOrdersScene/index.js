@@ -5,30 +5,29 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import OwnOrdersOverviewContainer from '@container/OwnOrdersOverviewContainer';
 import OwnOrderInfoContainer from '@container/OwnOrderInfoContainer';
+import { capitalize } from '@utilities';
 
 const ModalStack = StackNavigator({
   OwnOrders: {
     screen: OwnOrdersOverviewContainer,
     navigationOptions: () => ({
       headerStyle: {
-        backgroundColor: 'white'
-      }
-    })
+        backgroundColor: 'white',
+      },
+    }),
   },
   OrderInfo: {
     screen: OwnOrderInfoContainer,
     navigationOptions: ({ navigation }) => {
-      const params = navigation.state.params
-      return ({
-        title: `${params
-          ? params.order.store[0].toUpperCase() + params.order.store.substr(1)
-          : 'Product'}`,
+      const params = navigation.state.params;
+      return {
+        title: `${params ? capitalize(params.order.store) : 'Product'}`,
         headerStyle: {
-          backgroundColor: 'white'
-        }
-      })
-    }
-  }
+          backgroundColor: 'white',
+        },
+      };
+    },
+  },
 });
 
 export default class extends Component {
