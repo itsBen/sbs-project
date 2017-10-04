@@ -60,7 +60,7 @@ export default class extends Component {
                 >
                   {Object.values(order.products).map(product => (
                     <Cell
-                      key={product.productId}
+                      key={product.id}
                       cellStyle="RightDetail"
                       title={product.name}
                       detail={' ~ ' + product.price + ' €'}
@@ -81,40 +81,52 @@ export default class extends Component {
 
                 <ListHeaderSection header="Details" sectionPaddingBottom={0}>
                   <Cell
-                    cellContentView={OrderDetailsCell(
-                      'Location',
-                      'Near ' + order.location,
-                      'location-on'
-                    )}
+                    cellContentView={
+                      <OrderDetailsCell
+                        label="Location"
+                        info={'Near ' + order.location}
+                        iconName="location-on"
+                      />
+                    }
                   />
                   <Cell
-                    cellContentView={OrderDetailsCell(
-                      'Deliver by',
-                      moment(order.timeLimit).format('MM.DD.YY h:mm a'),
-                      'access-time'
-                    )}
+                    cellContentView={
+                      <OrderDetailsCell
+                        label="Deliver by"
+                        info={moment(order.timeLimit).format('MM.DD.YY h:mm a')}
+                        iconName="access-time"
+                      />
+                    }
                   />
                   <Cell
-                    cellContentView={OrderDetailsCell(
-                      'Earn delivery fee',
-                      order.deliveryFee + ' €',
-                      'attach-money'
-                    )}
+                    cellContentView={
+                      <OrderDetailsCell
+                        label="Earn delivery fee"
+                        info={order.deliveryFee + ' €'}
+                        iconName="attach-money"
+                      />
+                    }
                   />
                   <Cell
-                    cellContentView={OrderDetailsCell(
-                      'Status',
-                      order.status,
-                      'info'
-                    )}
+                    cellContentView={
+                      <OrderDetailsCell
+                        label="Status"
+                        info={order.status}
+                        iconName="info"
+                      />
+                    }
                   />
                   {order.purchasedAt && (
                     <Cell
-                      cellContentView={OrderDetailsCell(
-                        'Purchased at',
-                        moment(order.purchasedAt).format('MM.DD.YY h:mm a'),
-                        'shopping-basket'
-                      )}
+                      cellContentView={
+                        <OrderDetailsCell
+                          label="Purchased at"
+                          info={moment(order.purchasedAt).format(
+                            'MM.DD.YY h:mm a'
+                          )}
+                          iconName="shopping-basket"
+                        />
+                      }
                     />
                   )}
                 </ListHeaderSection>

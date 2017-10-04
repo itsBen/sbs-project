@@ -1,5 +1,6 @@
 export const getTotalPrice = products => {
   let sum = 0;
+  console.log(products);
   Object.values(products).forEach(product => {
     sum += parseFloat(product.price);
   });

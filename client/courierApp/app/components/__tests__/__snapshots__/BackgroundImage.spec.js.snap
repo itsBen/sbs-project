@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "height": null,
+      "width": null,
+    }
+  }
+>
+  <Image
+    source={1}
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        Object {
+          "height": null,
+          "width": null,
+        },
+        undefined,
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`renders correctly with different image 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "height": null,
+      "width": null,
+    }
+  }
+>
+  <Image
+    source={1}
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        Object {
+          "height": null,
+          "width": null,
+        },
+        undefined,
+      ]
+    }
+  />
+</View>
+`;

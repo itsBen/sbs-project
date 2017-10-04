@@ -46,7 +46,13 @@ export default class extends PureComponent {
                 {this.state.orders.map(order => (
                   <BrowseOrderCell
                     key={order.orderId}
-                    orderDetails={order}
+                    location={order.location}
+                    timeLimit={order.timeoutLimit}
+                    numberOfItems={order.numberOfItems}
+                    totalPrice={order.totalPrice}
+                    deliveryFee={order.deliveryFee}
+                    products={order.products}
+                    store={order.store}
                     onPress={() =>
                       this.props.navigation.navigate('OrderInfo', { order })}
                   />

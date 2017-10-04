@@ -1,10 +1,12 @@
 import React from 'react';
 import { ImageBackground } from 'react-native';
 
-export default ({ children }) => {
+export default ({ children, imageSource }) => {
   return (
     <ImageBackground
-      source={require('../../assets/Piglet.jpg')}
+      source={
+        imageSource ? require(imageSource) : require('../../assets/Piglet.jpg')
+      }
       style={backgroundImageStyle}
     >
       {children}

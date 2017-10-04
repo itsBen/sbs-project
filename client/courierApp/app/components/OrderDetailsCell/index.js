@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { capitalize } from '@utilities';
 
-export default (label, info, iconName) => {
+export default ({ label, info, iconName }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.labelText}>

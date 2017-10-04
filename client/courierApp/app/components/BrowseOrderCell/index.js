@@ -13,15 +13,19 @@ import styles from './styles';
 import { getTotalPrice, capitalize } from '@utilities';
 
 const getLogo = storeName => {
-  switch (storeName.toLowerCase()) {
-    case 'alepa':
-      return require('@assets/logo_alepa.png');
-    case 'k-market':
-      return require('@assets/logo_kmarket.png');
-    case 'lidl':
-      return require('@assets/logo_lidl.png');
-    default:
-      return require('@assets/logo_alepa.png');
+  try {
+    switch (storeName.toLowerCase()) {
+      case 'alepa':
+        return require('@assets/logo_alepa.png');
+      case 'k-market':
+        return require('@assets/logo_kmarket.png');
+      case 'lidl':
+        return require('@assets/logo_lidl.png');
+      default:
+        return require('@assets/logo_alepa.png');
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -29,7 +33,7 @@ const getTime = timeLimit => {
   return moment(timeLimit).fromNow();
 };
 
-export default ({ orderDetails, onPress }) => {
+export default props => {
   const {
     location,
     timeLimit,
@@ -37,8 +41,10 @@ export default ({ orderDetails, onPress }) => {
     totalPrice,
     deliveryFee,
     products,
-  } = orderDetails;
-  const storeName = capitalize(orderDetails.store);
+    onPress,
+    store,
+  } = props;
+  const storeName = capitalize(store);
 
   return (
     <Cell
@@ -58,7 +64,7 @@ export default ({ orderDetails, onPress }) => {
             </Text>
             <Text style={styles.text}>
               <Icon name="shopping-cart" size={18} /> {numberOfItems} items
-              worth {getTotalPrice(products)} €
+              worth {products && getTotalPrice(products)} €
             </Text>
           </View>
           <View style={{ flex: 2 }}>

@@ -13,6 +13,7 @@ export default class extends Component {
   componentWillMount() {
     API.getProductById(this.props.productId).then(res => {
       if (res.items.length > 0) {
+        console.log(res.items[0].fields);
         this.setState({ product: res.items[0].fields });
       } else {
         window.alert('Error!');
@@ -38,7 +39,9 @@ export default class extends Component {
                 <Image
                   style={styles.image}
                   source={{
-                    uri: 'https://facebook.github.io/react/img/logo_og.png',
+                    uri: product.photoURL
+                      ? product.photoURL
+                      : 'https://facebook.github.io/react/img/logo_og.png',
                   }}
                 />
               </View>
@@ -47,9 +50,10 @@ export default class extends Component {
 
               <View style={styles.metatable}>
                 <View style={styles.metatableElement}>
-                  <Text style={styles.metatableElementLabel}>Dimensions</Text>
+                  <Text style={styles.metatableElementLabel}>Size</Text>
                   <Text style={styles.metatableElementValue}>
-                    {product.dimensions}
+                    {product.size &&
+                      product.size.value + ' ' + product.size.unit}
                   </Text>
                 </View>
                 <View style={styles.metatableElement}>

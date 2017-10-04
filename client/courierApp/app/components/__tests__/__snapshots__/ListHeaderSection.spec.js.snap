@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "marginBottom": 10,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {},
+        Object {
+          "backgroundColor": "#F624591A",
+          "paddingBottom": 15,
+          "paddingTop": 0,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#F624598C",
+          "borderWidth": 0,
+          "padding": 10,
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#fff",
+            "fontSize": 17,
+            "fontWeight": "400",
+          }
+        }
+      >
+        Header
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {},
+          Object {
+            "backgroundColor": "#FFF",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "height": 0.5,
+            },
+            Object {
+              "backgroundColor": "#C8C7CC",
+              "marginLeft": 0,
+              "marginRight": 0,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {},
+          Object {
+            "backgroundColor": "#FFF",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "height": 0.5,
+            },
+            Object {
+              "backgroundColor": "#C8C7CC",
+              "marginLeft": 0,
+              "marginRight": 0,
+            },
+          ]
+        }
+      />
+    </View>
+  </View>
+</View>
+`;
