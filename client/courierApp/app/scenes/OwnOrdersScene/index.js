@@ -3,16 +3,30 @@ import { Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import MyOrdersOverviewContainer from '@container/MyOrdersOverviewContainer';
+import OwnOrdersOverviewContainer from '@container/OwnOrdersOverviewContainer';
+import OwnOrderInfoContainer from '@container/OwnOrderInfoContainer';
+import { capitalize } from '@utilities';
 
 const ModalStack = StackNavigator({
-  MyOrders: {
-    screen: MyOrdersOverviewContainer,
+  OwnOrders: {
+    screen: OwnOrdersOverviewContainer,
     navigationOptions: () => ({
       headerStyle: {
-        backgroundColor: 'white'
-      }
-    })
+        backgroundColor: 'white',
+      },
+    }),
+  },
+  OrderInfo: {
+    screen: OwnOrderInfoContainer,
+    navigationOptions: ({ navigation }) => {
+      const params = navigation.state.params;
+      return {
+        title: `${params ? capitalize(params.order.store) : 'Product'}`,
+        headerStyle: {
+          backgroundColor: 'white',
+        },
+      };
+    },
   },
 });
 

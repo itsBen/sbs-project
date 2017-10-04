@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
-import { ScrollView, StyleSheet, Text, View, Image, ActivityIndicator } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Image } from 'react-native';
 import { Section, TableView } from 'react-native-tableview-simple';
-import Modal from 'react-native-modal'
-import * as firebase from 'firebase'
+import Modal from 'react-native-modal';
+import * as firebase from 'firebase';
 
 // Internal
-import OrderCell from '@components/OrderCell'
-import BackgroundImage from '@components/BackgroundImage'
+import BrowseOrderCell from '@components/BrowseOrderCell';
+import BackgroundImage from '@components/BackgroundImage';
+import Spinner from '@components/Spinner';
 
 import { defaultPaddings } from '../../config';
 
@@ -16,7 +17,7 @@ export default class extends PureComponent {
   };
 
   state = {
-    orders: null
+    orders: null,
   };
 
   constructor(props) {
@@ -24,51 +25,49 @@ export default class extends PureComponent {
   }
 
   componentWillMount() {
-    firebase.database().ref('allOrders/pending/').on('value', (snapshot) => {
-      const orders = snapshot.val()
-      if(orders)
-        this.setState({ orders: Object.values(orders) })
-    })
+    firebase
+      .database()
+      .ref('allOrders/pending/')
+      .on('value', snapshot => {
+        const orders = snapshot.val();
+        if (orders) this.setState({ orders: Object.values(orders) });
+      });
   }
 
   render() {
     return (
       <BackgroundImage>
-        <ScrollView
-          style={styles.container}
-          alwaysBounceVertical={false}
-        >
-          {
-            !this.state.orders ? <ActivityIndicator size='large' style={styles.spinner}/>
-            :
+        {!this.state.orders ? (
+          <Spinner />
+        ) : (
+          <ScrollView style={styles.container} alwaysBounceVertical={false}>
             <TableView>
               <Section sectionPaddingTop={0} sectionPaddingBottom={0}>
-                { this.state.orders.map((order) => (
-                  <OrderCell
+                {this.state.orders.map(order => (
+                  <BrowseOrderCell
                     key={order.orderId}
-                    orderDetails={order}
-                    onPress={
-                      () => this.props.navigation.navigate('OrderInfo', { store: order.store, orderId: order.orderId } )
-                    }
+                    location={order.location}
+                    timeLimit={order.timeoutLimit}
+                    numberOfItems={order.numberOfItems}
+                    totalPrice={order.totalPrice}
+                    deliveryFee={order.deliveryFee}
+                    products={order.products}
+                    store={order.store}
+                    onPress={() =>
+                      this.props.navigation.navigate('OrderInfo', { order })}
                   />
                 ))}
               </Section>
             </TableView>
-          }
-      </ScrollView>
-    </BackgroundImage>
+          </ScrollView>
+        )}
+      </BackgroundImage>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  },
-  spinner: {
     flex: 1,
-    paddingTop: 50,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
+  },
 });
