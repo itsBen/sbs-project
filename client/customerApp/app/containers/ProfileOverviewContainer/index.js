@@ -5,7 +5,7 @@ import { TableView, Section } from 'react-native-tableview-simple';
 import ProfileHeaderCell from '../../components/ProfileHeaderCell';
 import IconCell from '../../components/IconCell';
 
-const Screen = () => (
+const Screen = ({ navigation }) => (
   <TableView>
     <Section sectionTintColor="#E9E9EF">
       <ProfileHeaderCell />
@@ -35,6 +35,11 @@ const Screen = () => (
         onPress={() => console.log('Hey')}
         title="Give us feedback"
         iconName="feedback"
+      />
+      <IconCell
+        onPress={() => navigation.navigate('Acknowledgments')}
+        title="Acknowledges"
+        iconName="info-outline"
       />
     </Section>
   </TableView>
