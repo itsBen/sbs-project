@@ -10,9 +10,9 @@ const ModalStack = StackNavigator({
     screen: ProfileOverviewContainer,
     navigationOptions: () => ({
       headerStyle: {
-        backgroundColor: 'white'
-      }
-    })
+        backgroundColor: 'white',
+      },
+    }),
   },
 });
 

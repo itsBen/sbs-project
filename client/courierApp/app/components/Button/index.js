@@ -6,14 +6,12 @@ export { default as SmallButton } from './SmallButton';
 export default ({ title, onPress, buttonStyle, disabled }) => (
   <TouchableOpacity onPress={onPress} disabled={disabled}>
     <View
-      style={
-        [
-          styles[buttonStyle]
-            ? styles[buttonStyle].container
-            : styles.default.container ,
-          disabled && styles.default.disabledButton
-        ]
-      }
+      style={[
+        styles[buttonStyle]
+          ? styles[buttonStyle].container
+          : styles.default.container,
+        disabled && styles.default.disabledButton,
+      ]}
     >
       <Text
         style={
@@ -42,8 +40,8 @@ const defaultStyles = {
   },
   disabledButton: {
     backgroundColor: '#c1c1c1',
-    borderColor: 'transparent'
-  }
+    borderColor: 'transparent',
+  },
 };
 
 const styles = {

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
@@ -13,7 +13,7 @@ export default StyleSheet.create({
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5,
     position: 'relative',
-    minHeight: 50
+    minHeight: 50,
   },
   header: {
     flex: 1,
@@ -39,7 +39,7 @@ export default StyleSheet.create({
     paddingHorizontal: 22,
     paddingBottom: 22,
     position: 'absolute',
-    bottom: 0
+    bottom: 0,
   },
   footerBody: {
     flex: 1,
@@ -84,6 +84,6 @@ export default StyleSheet.create({
   spinner: {
     justifyContent: 'center',
     alignSelf: 'center',
-    paddingTop: 70
-  }
+    paddingTop: 70,
+  },
 });

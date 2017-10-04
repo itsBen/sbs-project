@@ -1,14 +1,14 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
   },
   footer: {
     flexDirection: 'row',
     paddingHorizontal: 22,
-    paddingVertical: 10
+    paddingVertical: 10,
   },
   footerBody: {
     flex: 1,

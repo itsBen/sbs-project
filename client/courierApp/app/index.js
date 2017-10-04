@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native'
+import { View, Text } from 'react-native';
 import { TabNavigator } from 'react-navigation';
-import * as firebase from 'firebase'
+import * as firebase from 'firebase';
 
-import { firebaseConfig } from './config'
+import { firebaseConfig } from './config';
 import BrowseScene from '@scenes/BrowseScene';
 import OwnOrdersScene from '@scenes/OwnOrdersScene';
 import ProfileScene from '@scenes/ProfileScene';
@@ -21,7 +21,7 @@ export default TabNavigator(
     },
     Profile: {
       screen: ProfileScene,
-    }
+    },
   },
   {
     tabBarPosition: 'bottom',
