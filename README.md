@@ -1,5 +1,7 @@
 # ShopBuddy
 
+[![Build Status](https://travis-ci.org/itsBen/sbs-project.svg?branch=master)](https://travis-ci.org/itsBen/sbs-project)
+
 *A project from Software-Business-Startup at Metropolia University of Applied Sciences, Finland*
 
 ## Notes about architecture
