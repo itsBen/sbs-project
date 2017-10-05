@@ -63,10 +63,9 @@ export default class extends Component {
                   </Text>
                 </View>
                 <View style={styles.metatableElement}>
-                  <Text style={styles.metatableElementLabel}>Contains</Text>
+                  <Text style={styles.metatableElementLabel}>Dimensions</Text>
                   <Text style={styles.metatableElementValue}>
-                    Lorem ipsum doter iter lokter fuht wers gasd birte sniope
-                    neqs cunvxs corniclres
+                    {product.dimensions}
                   </Text>
                 </View>
               </View>

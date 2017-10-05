@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#fff",
+      "borderColor": "rgba(0, 0, 0, 0.1)",
+      "borderRadius": 5,
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "rgb(230,37,101)",
+        "borderTopLeftRadius": 5,
+        "borderTopRightRadius": 5,
+        "flexDirection": "row",
+        "minHeight": 50,
+        "position": "relative",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#fff",
+            "fontSize": 22,
+            "fontWeight": "bold",
+            "paddingVertical": 10,
+          }
+        }
+      >
+        
+      </Text>
+    </View>
+  </View>
+  <ActivityIndicator
+    animating={true}
+    color="#999999"
+    hidesWhenStopped={true}
+    size="large"
+    style={
+      Object {
+        "alignSelf": "center",
+        "justifyContent": "center",
+        "paddingTop": 70,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "bottom": 0,
+        "flexDirection": "row",
+        "paddingBottom": 22,
+        "paddingHorizontal": 22,
+        "position": "absolute",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "height": 10,
+          }
+        }
+      />
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "rgb(230,37,101)",
+                "borderColor": "rgb(230,37,101)",
+                "borderRadius": 5,
+                "borderWidth": 1,
+                "paddingHorizontal": 10,
+                "paddingVertical": 5,
+              },
+              Object {
+                "backgroundColor": "#fff",
+                "borderColor": "transparent",
+              },
+            ]
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            disabled={false}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#FFF",
+                  "fontSize": 17,
+                },
+                Object {
+                  "color": "#808080",
+                },
+              ]
+            }
+          >
+            Cancel
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
