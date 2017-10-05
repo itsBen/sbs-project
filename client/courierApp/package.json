@@ -5,7 +5,9 @@
 	"scripts": {
 		"format": "prettier --trailing-comma es5 --single-quote --write 'app/**/*.js'",
 		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest",
+		"jest": "jest",
+		"lint": "eslint index.*.js app/",
+		"test": "npm run lint && npm run jest",
 		"precommit": "lint-staged"
 	},
 	"lint-staged": {
@@ -30,8 +32,13 @@
 		"react-navigation": "^1.0.0-beta.11"
 	},
 	"devDependencies": {
+		"babel-eslint": "^8.0.1",
 		"babel-jest": "21.2.0",
 		"babel-preset-react-native": "4.0.0",
+		"eslint": "^4.8.0",
+		"eslint-config-prettier": "^2.6.0",
+		"eslint-plugin-prettier": "^2.3.1",
+		"eslint-plugin-react": "^7.4.0",
 		"husky": "^0.14.3",
 		"jest": "^21.2.1",
 		"lint-staged": "^4.2.1",
