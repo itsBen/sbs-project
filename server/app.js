@@ -32,7 +32,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect(process.env.MONGODB_URI);
+//mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect('mongodb://admin:admin@ds141284.mlab.com:41284/shopbuddy');
 
 routes(app, passport);
 
