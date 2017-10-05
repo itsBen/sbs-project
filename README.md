@@ -13,7 +13,7 @@ There's no need to develop a backend on our own with basically common functional
 
 #### The *backend* constists of the following components
 * `contentful.com`: A headless Content-Management-System. Used to manage the productinformation
-* `firebase`: A Backend-As-A-Service. Used as realtimedatabase to manage orders; for authentication; storage for user-generated content; Sending Push-Notifications; Collect analytics data
+* `firebase`: A Backend-As-A-Service. Used as real time database to manage orders; For authentication; Storage for user-generated content; Sending Push-Notifications; Collect analytics data
 * `Custom Backend`: A self developed backend for custom functions. Used to calculate delivery costs
 
 #### The *frontend* consists of the following components
