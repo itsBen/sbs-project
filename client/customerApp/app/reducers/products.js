@@ -33,9 +33,14 @@ export default combineReducers({
   isFetching,
 });
 
-export const getProduct = (state, id) => state.byId[id];
+const initialState = {
+  byId: {},
+  isFetching: false,
+};
 
-export const getProductsByCategoryId = (state, categoryId) =>
+export const getProduct = (state = initialState, id) => state.byId[id];
+
+export const getProductsByCategoryId = (state = initialState, categoryId) =>
   Object.values(state.byId)
     .filter(value => value.categoryIds.includes(categoryId))
     .reduce((arr, product) => {

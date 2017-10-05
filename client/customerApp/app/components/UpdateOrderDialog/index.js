@@ -7,7 +7,7 @@ import IconButton from '../IconButton';
 export default class extends PureComponent {
   state = {
     quantity: this.props.quantity || 0,
-    priceTotal: this.props.productPrice * this.props.quantity,
+    priceTotal: this.props.productPrice * this.props.quantity || 0,
   };
 
   setQuantity = quantity => {
