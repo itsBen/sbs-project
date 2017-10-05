@@ -7,6 +7,9 @@
 ## Notes about architecture
 
 The project leverages several services to provide its functionality.
+The idea behind that is to be fast and as flexible as possible creating a MVP.
+Relying on BaaS allows us to focus on our core product.
+There's no need to develop a backend on our own with basically common functionality.
 
 #### The *backend* constists of the following components
 * `contentful.com`: A headless Content-Management-System. Used to manage the productinformation
