@@ -5,16 +5,6 @@ import styles from './styles';
 import BackgroundImage from '@components/BackgroundImage';
 
 class LaunchScreenContainer extends Component {
-  navigateToTabs() {
-    console.log('pressed');
-    const resetAction = NavigationActions.reset({
-      index: 0,
-      key: null,
-      actions: [NavigationActions.navigate({ routeName: 'TabScreen' })],
-    });
-    this.props.navigation.dispatch(resetAction);
-  }
-
   render() {
     return (
       <BackgroundImage>
