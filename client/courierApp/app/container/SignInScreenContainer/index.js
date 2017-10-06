@@ -8,14 +8,15 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import * as firebase from 'firebase';
+import { NavigationActions } from 'react-navigation';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import BackgroundImage from '@components/BackgroundImage';
 
 class AuthScreenContainer extends Component {
   state = {
-    email: '',
-    password: '',
+    email: 'test@test.com',
+    password: 'test123',
     error: null,
   };
 
@@ -25,7 +26,11 @@ class AuthScreenContainer extends Component {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        this.props.navigation.navigate('TabScreen');
+        const resetAction = NavigationActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'TabScreen' })],
+        });
+        this.props.navigation.dispatch(resetAction);
       })
       .catch(error => {
         const errorMessage = error.message;

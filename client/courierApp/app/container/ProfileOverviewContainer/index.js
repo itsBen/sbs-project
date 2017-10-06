@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
+import { NavigationActions } from 'react-navigation';
 
 import { TableView, Section } from 'react-native-tableview-simple';
 
@@ -13,10 +14,18 @@ class Screen extends Component {
       .signOut()
       .then(
         () => {
+          // const resetAction = NavigationActions.reset({
+          //   index: 0,
+          //   actions: [
+          //     NavigationActions.navigate({ routeName: 'LaunchScreen'})
+          //   ]
+          // })
+          // this.props.navigation.dispatch(resetAction)
           this.props.navigation.navigate('LaunchScreen');
         },
         error => {
           console.error('Sign Out Error', error);
+          window.alert('Sign Out Error', error);
         }
       );
   }
