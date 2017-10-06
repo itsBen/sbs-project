@@ -24,8 +24,7 @@ class AuthScreenContainer extends Component {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(res => {
-        console.log(res);
+      .then(() => {
         this.props.navigation.navigate('TabScreen');
       })
       .catch(error => {
@@ -79,7 +78,7 @@ class AuthScreenContainer extends Component {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.button}
-              onPress={this.handleSignIn.bind(this)}
+              onPress={() => this.handleSignIn()}
             >
               <Text style={styles.buttonText}>Sign In</Text>
             </TouchableOpacity>

@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
+import * as firebase from 'firebase';
 import { NavigationActions } from 'react-navigation';
 import styles from './styles';
 import BackgroundImage from '@components/BackgroundImage';
 
 class LaunchScreenContainer extends Component {
+  handleOnStart() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        // User is signed in.
+        this.props.navigation.navigate('TabScreen');
+      } else {
+        // User is signed out.
+        this.props.navigation.navigate('SignInScreen');
+      }
+    });
+  }
+
   render() {
     return (
       <BackgroundImage>
@@ -20,7 +33,7 @@ class LaunchScreenContainer extends Component {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => this.props.navigation.navigate('SignInScreen')}
+              onPress={() => this.handleOnStart()}
             >
               <Text style={styles.buttonText}>Start</Text>
             </TouchableOpacity>
