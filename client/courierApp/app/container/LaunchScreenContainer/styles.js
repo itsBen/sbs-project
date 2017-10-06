@@ -17,20 +17,21 @@ export default {
     marginTop: 10,
     fontWeight: '200',
     textAlign: 'center',
+    fontFamily: 'Avenir',
   },
   logoSubtitle: {
     fontSize: 25,
   },
   buttonContainer: {
-    position: 'absolute',
-    alignSelf: 'center',
-    bottom: 80,
+    flex: 1,
+    justifyContent: 'flex-end',
   },
   button: {
     borderRadius: 3,
     backgroundColor: '#db7774',
+    marginBottom: 50,
+    marginHorizontal: 25,
     paddingVertical: 15,
-    paddingHorizontal: 150,
     alignItems: 'center',
   },
   buttonText: {

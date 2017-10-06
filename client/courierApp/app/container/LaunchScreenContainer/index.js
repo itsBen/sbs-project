@@ -20,7 +20,7 @@ class LaunchScreenContainer extends Component {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => this.props.navigation.navigate('TabScreen')}
+              onPress={() => this.props.navigation.navigate('AuthScreen')}
             >
               <Text style={styles.buttonText}>Start</Text>
             </TouchableOpacity>
