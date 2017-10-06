@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { NavigationActions } from 'react-navigation';
+import styles from './styles';
 import BackgroundImage from '@components/BackgroundImage';
 
 class LaunchScreenContainer extends Component {
@@ -17,51 +18,21 @@ class LaunchScreenContainer extends Component {
   render() {
     return (
       <BackgroundImage>
-        <View style={{ flex: 1 }}>
-          <View style={{ marginTop: 125 }}>
+        <View style={styles.container}>
+          <View style={styles.logoContainer}>
             <Image
               source={require('@assets/logo_shopbuddy.png')}
-              style={{ alignSelf: 'center', width: 180, height: 180 }}
+              style={styles.logoImage}
             />
-            <Text
-              style={{
-                color: '#fff',
-                backgroundColor: 'transparent',
-                fontSize: 40,
-                marginTop: 10,
-                fontWeight: '200',
-                textAlign: 'center',
-              }}
-            >
-              Shop Buddy
-            </Text>
-            <Text
-              style={{
-                color: '#fff',
-                backgroundColor: 'transparent',
-                fontSize: 25,
-                marginTop: 10,
-                fontWeight: '200',
-                textAlign: 'center',
-              }}
-            >
-              Courier
-            </Text>
+            <Text style={styles.logoTitle}>Shop Buddy</Text>
+            <Text style={[styles.logoTitle, styles.logoSubtitle]}>Courier</Text>
           </View>
-          <View
-            style={{ position: 'absolute', alignSelf: 'center', bottom: 80 }}
-          >
+          <View style={styles.buttonContainer}>
             <TouchableOpacity
-              style={{
-                borderRadius: 3,
-                backgroundColor: '#db7774',
-                paddingVertical: 15,
-                paddingHorizontal: 150,
-                alignItems: 'center',
-              }}
+              style={styles.button}
               onPress={() => this.props.navigation.navigate('TabScreen')}
             >
-              <Text style={{ color: '#fff' }}>Start</Text>
+              <Text style={styles.buttonText}>Start</Text>
             </TouchableOpacity>
           </View>
         </View>
