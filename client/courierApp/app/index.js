@@ -10,7 +10,8 @@ import ProfileScene from '@scenes/ProfileScene';
 import OnBoardingScene from '@scenes/OnBoardingScene';
 
 import LaunchScreenContainer from '@container/LaunchScreenContainer';
-import AuthScreenContainer from '@container/AuthScreenContainer';
+import SignInScreenContainer from '@container/SignInScreenContainer';
+import SignUpScreenContainer from '@container/SignUpScreenContainer';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -41,7 +42,8 @@ const MainTabsScreen = TabNavigator(
 const PrimaryNav = StackNavigator(
   {
     LaunchScreen: { screen: LaunchScreenContainer },
-    AuthScreen: { screen: AuthScreenContainer },
+    SignInScreen: { screen: SignInScreenContainer },
+    SignUpScreen: { screen: SignUpScreenContainer },
     TabScreen: { screen: MainTabsScreen },
   },
   {

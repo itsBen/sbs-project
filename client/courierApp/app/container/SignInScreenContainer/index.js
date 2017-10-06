@@ -1,10 +1,39 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  TextInput,
+  TouchableHighlight,
+} from 'react-native';
+import * as firebase from 'firebase';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import BackgroundImage from '@components/BackgroundImage';
 
 class AuthScreenContainer extends Component {
+  state = {
+    email: '',
+    password: '',
+    error: null,
+  };
+
+  handleSignIn() {
+    const { email, password } = this.state;
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(res => {
+        console.log(res);
+        this.props.navigation.navigate('TabScreen');
+      })
+      .catch(error => {
+        const errorMessage = error.message;
+        this.setState({ error: errorMessage, password: '' });
+      });
+  }
+
   render() {
     return (
       <BackgroundImage>
@@ -23,35 +52,50 @@ class AuthScreenContainer extends Component {
 
           <View style={styles.inputsContainer}>
             <TextInput
-              placeholder="User Name"
+              value={this.state.email}
+              onChangeText={email => this.setState({ email })}
+              placeholder="Email"
               placeholderTextColor="rgba(255,255,255,0.6)"
               selectionColor={'red'}
               style={styles.input}
+              autoCorrect={false}
             />
 
             <TextInput
+              value={this.state.password}
+              onChangeText={password => this.setState({ password })}
               placeholder="Password"
               placeholderTextColor="rgba(255,255,255,0.6)"
               selectionColor={'red'}
-              secureTextEntry
               style={styles.input}
+              autoCorrect={false}
+              secureTextEntry
             />
-            {this.props.error && (
-              <Text style={styles.error}>
-                Oops! Wrong user name or password
-              </Text>
+            {this.state.error && (
+              <Text style={styles.error}>Oops! Wrong email or password</Text>
             )}
           </View>
 
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => this.props.navigation.navigate('TabScreen')}
+              onPress={this.handleSignIn.bind(this)}
             >
               <Text style={styles.buttonText}>Sign In</Text>
             </TouchableOpacity>
             <Text style={styles.footerText}>
-              Don't have an account? Sign up
+              Don't have an account?
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('SignUpScreen')}
+                style={{ height: 14, width: 100 }}
+              >
+                <Text
+                  style={{ color: '#fff', textDecorationLine: 'underline' }}
+                >
+                  {' '}
+                  Sign up
+                </Text>
+              </TouchableOpacity>
             </Text>
           </View>
         </View>
