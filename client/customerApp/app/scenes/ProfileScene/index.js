@@ -4,10 +4,17 @@ import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import ProfileOverviewContainer from '../../containers/ProfileOverviewContainer';
+import AcknowledgmentsContainer from '../../containers/AcknowledgmentsContainer';
 
 const ModalStack = StackNavigator({
   Profile: {
     screen: ProfileOverviewContainer,
+  },
+  Acknowledgments: {
+    screen: AcknowledgmentsContainer,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Acknowledgments',
+    }),
   },
 });
 

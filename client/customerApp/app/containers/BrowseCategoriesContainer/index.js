@@ -25,11 +25,13 @@ class Container extends PureComponent {
                 categoryId: category.id,
               })}
             label={category.name}
-            imageSource={{
-              uri:
-                category.iconURL ||
-                'https://facebook.github.io/react/img/logo_og.png',
-            }}
+            imageSource={
+              category.icon && category.icon.hasOwnProperty('file')
+                ? {
+                    uri: `https:${category.icon.file.url}`,
+                  }
+                : null
+            }
           />
         ))}
       </ScrollView>

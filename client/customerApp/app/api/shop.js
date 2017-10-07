@@ -10,15 +10,34 @@ const contentfulCredentials = {
   resolveLinks: false,
 };
 
+// Returns Promise
+export const getLicenses = () =>
+  contentful
+    .createClient(contentfulCredentials)
+    .getEntries({ content_type: 'licenses' });
+
 const getProductCategories = cb => {
   contentful
     .createClient(contentfulCredentials)
     .getEntries({
       content_type: 'productCategory',
+      include: 1,
     })
-    .then(entries => {
-      cb(entries.items);
-    });
+    .then(response =>
+      response.items.map(item => {
+        const nextItem = { ...item.fields };
+        nextItem.id = item.sys.id;
+        if (nextItem.icon) {
+          const icon = response.includes.Asset.find(
+            assetItem => assetItem.sys.id === item.fields.icon.sys.id
+          );
+          nextItem.icon =
+            icon && icon.hasOwnProperty('fields') ? icon.fields : null;
+        }
+        return nextItem;
+      })
+    )
+    .then(items => cb(items));
 };
 
 const getProductsByCategory = (cb, categoryId) => {
@@ -28,9 +47,24 @@ const getProductsByCategory = (cb, categoryId) => {
       content_type: 'product',
       'fields.categories.sys.id[in]': categoryId,
     })
-    .then(entries => {
-      cb(entries.items);
-    });
+    .then(response =>
+      response.items.map(item => {
+        const nextItem = { ...item.fields };
+        nextItem.id = item.sys.id;
+        nextItem.categoryIds = nextItem.categories.map(
+          category => category.sys.id
+        );
+        if (nextItem.photoUrl) {
+          const image = response.includes.Asset.find(
+            assetItem => assetItem.sys.id === item.fields.photoUrl.sys.id
+          );
+          nextItem.photoUrl =
+            image && image.hasOwnProperty('fields') ? image.fields : null;
+        }
+        return nextItem;
+      })
+    )
+    .then(items => cb(items));
 };
 
 const TIMEOUT = 100;

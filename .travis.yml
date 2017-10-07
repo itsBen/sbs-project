@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+ - "stable"
+
+install:
+  # CourierApp
+  - cd ${TRAVIS_BUILD_DIR}/client/courierApp
+  - yarn
+
+  # CustomerApp
+  - cd ${TRAVIS_BUILD_DIR}/client/customerApp
+  - yarn
+
+
+script:
+  # CourierApp
+  - cd ${TRAVIS_BUILD_DIR}/client/courierApp
+  - yarn test
+
+  # CustomerApp
+  - cd ${TRAVIS_BUILD_DIR}/client/customerApp
+  - yarn test
