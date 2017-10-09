@@ -47,7 +47,7 @@ export default class extends PureComponent {
                   <BrowseOrderCell
                     key={order.orderId}
                     location={order.location}
-                    timeLimit={order.timeoutLimit}
+                    timeLimit={order.timeLimit}
                     numberOfItems={order.numberOfItems}
                     totalPrice={order.totalPrice}
                     deliveryFee={order.deliveryFee}

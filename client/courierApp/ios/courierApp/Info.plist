@@ -36,11 +36,13 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSMainNibFile</key>
 	<string>LaunchScreen</string>
 	<key>NSMainNibFile~ipad</key>
 	<string>LaunchScreen</string>
+	<key>BugsnagAPIKey</key>
+	<string>b88f71e647eefb2a60d4e0c5b2eef5f1</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

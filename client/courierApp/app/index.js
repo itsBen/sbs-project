@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 import * as firebase from 'firebase';
 
 import { firebaseConfig } from './config';
@@ -9,9 +9,13 @@ import OwnOrdersScene from '@scenes/OwnOrdersScene';
 import ProfileScene from '@scenes/ProfileScene';
 import OnBoardingScene from '@scenes/OnBoardingScene';
 
+import LaunchScreenContainer from '@container/LaunchScreenContainer';
+import SignInScreenContainer from '@container/SignInScreenContainer';
+import SignUpScreenContainer from '@container/SignUpScreenContainer';
+
 firebase.initializeApp(firebaseConfig);
 
-export default TabNavigator(
+const MainTabsScreen = TabNavigator(
   {
     Browse: {
       screen: BrowseScene,
@@ -34,3 +38,20 @@ export default TabNavigator(
     },
   }
 );
+
+const PrimaryNav = StackNavigator(
+  {
+    LaunchScreen: { screen: LaunchScreenContainer },
+    SignInScreen: { screen: SignInScreenContainer },
+    SignUpScreen: { screen: SignUpScreenContainer },
+    TabScreen: { screen: MainTabsScreen },
+  },
+  {
+    headerMode: 'none',
+    headerBackTitleStyle: {
+      color: 'pink',
+    },
+  }
+);
+
+export default () => <PrimaryNav />;
