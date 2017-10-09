@@ -13,11 +13,11 @@ export default ({ imageSource, label, onPress }) => (
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    paddingVertical: 10,
+    paddingVertical: 15,
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 95,
+    height: 95,
     borderRadius: 50,
     marginBottom: 10,
   },

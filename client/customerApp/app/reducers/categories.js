@@ -10,8 +10,7 @@ const byId = (state = {}, action) => {
       return {
         ...state,
         ...action.categories.reduce((obj, category) => {
-          obj[category.sys.id] = category.fields;
-          obj[category.sys.id]['id'] = category.sys.id;
+          obj[category.id] = category;
           return obj;
         }, {}),
       };
@@ -43,6 +42,12 @@ export default combineReducers({
   isFetching,
 });
 
-export const getCategory = (state, id) => state.byId[id];
+const initialState = {
+  byId: {},
+  isFetching: false,
+};
 
-export const getCategories = state => Object.values(state.byId);
+export const getCategory = (state = initialState, id) => state.byId[id];
+
+export const getCategories = (state = initialState) =>
+  Object.values(state.byId);

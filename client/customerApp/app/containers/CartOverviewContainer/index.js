@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { TableView, Section, Cell } from 'react-native-tableview-simple';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
 
+import { updateQuantityOnCart, removeFromCart } from '../../actions';
 import { getTotal, getCartProducts } from '../../reducers';
 import { defaultPaddings } from '../../config';
 import Button from '../../components/Button';
@@ -12,27 +13,42 @@ import UpdateOrderDialog from '../../components/UpdateOrderDialog';
 import firebase from '../../api/firebase';
 
 class Container extends PureComponent {
-  navigationOptions = {
+  static navigationOptions = {
     title: 'Cart',
   };
 
   state = {
-    currentDetailsProductId: null,
+    currentProductDetails: null,
   };
 
   constructor(props) {
     super(props);
     this.handleOpenDetails = this.handleOpenDetails.bind(this);
     this.handleOrderRequest = this.handleOrderRequest.bind(this);
+    this.handleRemoveOrder = this.handleRemoveOrder.bind(this);
+    this.handleUpdateQuantity = this.handleUpdateQuantity.bind(this);
   }
 
-  handleUpdateOrder() {
-    console.log('bla!');
+  handleUpdateQuantity(quantity) {
+    this.props.updateQuantityOnCart(
+      this.state.currentProductDetails.id,
+      quantity
+    );
+    this.setState({
+      currentProductDetails: null,
+    });
   }
 
   handleOpenDetails(productDetails) {
     this.setState({
       currentProductDetails: productDetails,
+    });
+  }
+
+  handleRemoveOrder(productId) {
+    this.props.removeFromCart(productId);
+    this.setState({
+      currentProductDetails: null,
     });
   }
 
@@ -72,9 +88,16 @@ class Container extends PureComponent {
       .update(updates)
       .then(() => this.setState({ isSaving: false, error: null }))
       .catch(error => this.setState({ isSaving: false, error }));
+
+    Alert.alert(
+      'Order placed',
+      'You will be notified when we found a courier for your order.',
+      [{ text: 'OK', style: 'cancel' }]
+    );
   }
 
   render() {
+    console.log(this.state.currentProductDetails);
     // Render Modal every time to allow animations
     const renderUpdateOrderModal = () => (
       <Modal
@@ -83,10 +106,39 @@ class Container extends PureComponent {
         animationOut={'slideOutRight'}
       >
         <UpdateOrderDialog
-          productId={this.state.currentProductDetails}
+          productTitle={
+            !!this.state.currentProductDetails &&
+            this.state.currentProductDetails.hasOwnProperty('title')
+              ? this.state.currentProductDetails.title
+              : 'Product Details'
+          }
+          productPrice={
+            !!this.state.currentProductDetails &&
+            this.state.currentProductDetails.hasOwnProperty('price')
+              ? this.state.currentProductDetails.price
+              : 'No Information'
+          }
+          productImageSource={
+            !!this.state.currentProductDetails &&
+            this.state.currentProductDetails.hasOwnProperty('photoUrl') &&
+            this.state.currentProductDetails.photoUrl.hasOwnProperty('file')
+              ? {
+                  uri: `https:${this.state.currentProductDetails.photoUrl.file
+                    .url}`,
+                }
+              : null
+          }
           size="bla"
-          onUpdateOrder={this.handleUpdateOrder}
+          quantity={
+            !!this.state.currentProductDetails &&
+            this.state.currentProductDetails.hasOwnProperty('quantity')
+              ? this.state.currentProductDetails.quantity
+              : 1
+          }
+          onUpdateQuantity={this.handleUpdateQuantity}
           onClose={() => this.setState({ currentProductDetails: null })}
+          onRemoveFromCart={() =>
+            this.handleRemoveOrder(this.state.currentProductDetails.id)}
         />
       </Modal>
     );
@@ -95,6 +147,13 @@ class Container extends PureComponent {
     const deliveryCosts = 2.85;
     const totalCosts = (cartProductsTotal + deliveryCosts).toFixed(2);
 
+    if (this.props.cartProducts.length === 0) {
+      return (
+        <View style={styles.descriptionView}>
+          <Text style={styles.descriptionViewText}>Your cart is empty.</Text>
+        </View>
+      );
+    }
     return (
       <View style={styles.container}>
         {renderUpdateOrderModal()}
@@ -160,6 +219,18 @@ const styles = StyleSheet.create({
     paddingVertical: defaultPaddings.paddingHorizontal,
     paddingHorizontal: defaultPaddings.paddingHorizontal,
   },
+  descriptionView: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: '#f3f3f3',
+  },
+  descriptionViewText: {
+    fontSize: 20,
+    textAlign: 'center',
+    color: '#636268',
+    marginBottom: 15,
+  },
 });
 
 const mapStateToProps = state => ({
@@ -167,4 +238,7 @@ const mapStateToProps = state => ({
   cartTotal: getTotal(state),
 });
 
-export default connect(mapStateToProps)(Container);
+export default connect(mapStateToProps, {
+  removeFromCart,
+  updateQuantityOnCart,
+})(Container);

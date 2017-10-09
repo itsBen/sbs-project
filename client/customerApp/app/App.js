@@ -10,10 +10,10 @@ import OnBoardingScene from './scenes/OnBoardingScene';
 
 export default TabNavigator(
   {
-    Browse: {
+    BrowseScene: {
       screen: BrowseScene,
     },
-    Cart: {
+    CartScene: {
       screen: CartScene,
     },
     OrdersScene: {

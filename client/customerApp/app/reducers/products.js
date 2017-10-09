@@ -7,13 +7,8 @@ const byId = (state = {}, action) => {
       return {
         ...state,
         ...action.products.reduce((obj, product) => {
-          obj[product.sys.id] = Object.assign({}, product.fields, {
-            categories: undefined,
-          });
-          obj[product.sys.id]['categoryIds'] = product.fields.categories.map(
-            category => category.sys.id
-          );
-          obj[product.sys.id]['id'] = product.sys.id;
+          obj[product.id] = product;
+          obj[product.id].price = product.price.toFixed(2);
           return obj;
         }, {}),
       };
@@ -38,9 +33,14 @@ export default combineReducers({
   isFetching,
 });
 
-export const getProduct = (state, id) => state.byId[id];
+const initialState = {
+  byId: {},
+  isFetching: false,
+};
 
-export const getProductsByCategoryId = (state, categoryId) =>
+export const getProduct = (state = initialState, id) => state.byId[id];
+
+export const getProductsByCategoryId = (state = initialState, categoryId) =>
   Object.values(state.byId)
     .filter(value => value.categoryIds.includes(categoryId))
     .reduce((arr, product) => {

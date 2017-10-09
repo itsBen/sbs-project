@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { FlatList, View } from 'react-native';
+import { Alert, FlatList, View } from 'react-native';
 import Modal from 'react-native-modal';
 import { Separator } from 'react-native-tableview-simple';
 import { connect } from 'react-redux';
@@ -10,6 +10,9 @@ import ProductCell from '../../components/ProductCell';
 import AddToCartDialog from '../../components/AddToCartDialog';
 
 class Container extends PureComponent {
+  static navigationOptions = {
+    title: 'Cart',
+  };
   state = {
     currentProductDetails: null,
   };
@@ -26,8 +29,13 @@ class Container extends PureComponent {
     );
   }
 
-  handleAddToCart(productId) {
-    this.props.addToCart(productId);
+  handleAddToCart(productDetails) {
+    this.props.addToCart(productDetails.id);
+    Alert.alert(
+      'Added to Cart',
+      `You added ${productDetails.name} to your cart.`,
+      [{ text: 'OK', style: 'cancel' }]
+    );
   }
 
   handleOpenDetails(productDetails) {
@@ -57,8 +65,19 @@ class Container extends PureComponent {
               ? this.state.currentProductDetails.price
               : 'No Information'
           }
+          productImageSource={
+            !!this.state.currentProductDetails &&
+            this.state.currentProductDetails.hasOwnProperty('photoUrl') &&
+            this.state.currentProductDetails.photoUrl.hasOwnProperty('file')
+              ? {
+                  uri: `https:${this.state.currentProductDetails.photoUrl.file
+                    .url}`,
+                }
+              : null
+          }
           size="bla"
-          onAddToCart={this.handleAddToCart}
+          onAddToCart={() =>
+            this.handleAddToCart(this.state.currentProductDetails)}
           onClose={() => this.setState({ currentProductDetails: null })}
         />
       </Modal>
@@ -71,15 +90,19 @@ class Container extends PureComponent {
           keyExtractor={(item, index) => item.id}
           renderItem={({ item, separators }) => (
             <ProductCell
-              onAddToCart={() => this.handleAddToCart(item.id)}
+              onAddToCart={() => this.handleAddToCart(item)}
               onOpenDetails={() => this.handleOpenDetails(item)}
               productId={item.id}
               price={item.price}
               title={item.name}
               stores={['Lidl']}
-              imageSource={{
-                uri: 'https://facebook.github.io/react/img/logo_og.png',
-              }}
+              imageSource={
+                item.photoUrl && item.photoUrl.hasOwnProperty('file')
+                  ? {
+                      uri: `https:${item.photoUrl.file.url}`,
+                    }
+                  : null
+              }
               onHighlightRow={separators.highlight}
               onUnHighlightRow={separators.unhighlight}
             />
