@@ -46,11 +46,11 @@ describe('/GET product by id', ()=>{
     chai.request(app).get('/products/id/59c7eb9bb639741b78730adf')
       .end((err,res)=>{
         res.should.have.status(200);
-        res.body.length.should.be.eql(1);
-        const product = res.body[0];
+        res.body.should.be.a('Object');
+        const product = res.body;
         product.should.have.property('size');
         product._id.should.be.eql('59c7eb9bb639741b78730adf');
-        done()
-;      })
+        done();
+      })
   })
 })
