@@ -16,6 +16,10 @@
 * `Screens`: Orchestrate several `Components` and provide them with `props`
 * `Components`: Dump components which shouldn't have any state
 
+### Misc
+
+Errorlogs: All errors will be send automatically to Bugsnag.
+
 ### Tests
 
 ```sh

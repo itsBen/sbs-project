@@ -38,7 +38,7 @@ export default class LoginScreen extends Component {
         this.shakeStage();
         this.setState({ isProcessing: false, isError: true, password: '' });
         if (__DEV__) {
-          console.log('User signin error', err);
+          console.log('Login Error', err);
         }
       });
   };
@@ -68,7 +68,14 @@ export default class LoginScreen extends Component {
         behavior="position"
         style={styles.container}
       >
-        <View style={styles.aboutappIcon} />
+        <View style={styles.aboutappIcon}>
+          <Image
+            style={styles.aboutappIcon_Image}
+            source={require('../../assets/icon.png')}
+            defaultSource={require('../../assets/icon.png')}
+          />
+          <Text style={styles.aboutappLabel}>ShopBuddy</Text>
+        </View>
 
         <Animated.View style={[styles.stage, { left: animatedLeft }]}>
           <View style={styles.stageBody}>
@@ -151,11 +158,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 50,
   },
+  aboutappLabel: {
+    fontSize: 23,
+    marginTop: 20,
+    color: 'rgb(230,37,101)',
+  },
   aboutappIcon_Image: {
     borderRadius: 5,
     height: 100,
     width: 100,
-    borderWidth: 1,
-    borderColor: '#c8c7cc',
+    tintColor: 'rgb(230,37,101)',
   },
 });
