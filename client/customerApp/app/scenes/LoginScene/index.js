@@ -16,8 +16,8 @@ import Button from '../../components/Button';
 
 export default class LoginScreen extends Component {
   state = {
-    mail: '',
-    password: '',
+    mail: 'test@test.com',
+    password: 'test123',
     isProcessing: false,
     isError: false,
     animatedLeft: new Animated.Value(0),
