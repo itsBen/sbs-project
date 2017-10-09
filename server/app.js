@@ -22,6 +22,8 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+//provide tools for express app
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,12 +31,14 @@ app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//initialize and setup passport configuration
 app.use(passport.initialize());
 app.use(passport.session());
 
-//mongoose.connect(process.env.MONGODB_URI);
-mongoose.connect('mongodb://admin:admin@ds141284.mlab.com:41284/shopbuddy');
+//connect to the database
+mongoose.connect(process.env.MONGODB_URI);
 
+//pass the app and passport modules to the routes 
 routes(app, passport);
 
 module.exports = app;
